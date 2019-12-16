@@ -1,0 +1,184 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6530,        176]
+NotebookOptionsPosition[      5984,        158]
+NotebookOutlinePosition[      6352,        174]
+CellTagsIndexPosition[      6309,        171]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", " ", 
+  TagBox[GridBox[{
+     {"\[Piecewise]", GridBox[{
+        {"0", 
+         RowBox[{"x", "<", "0"}]},
+        {
+         RowBox[{"2", "x"}], 
+         RowBox[{"0", "\[LessEqual]", " ", "x", " ", "\[LessEqual]", " ", 
+          FractionBox["1", "2"]}]},
+        {
+         RowBox[{"2", 
+          RowBox[{"(", 
+           RowBox[{"1", "-", "x"}], ")"}]}], 
+         RowBox[{
+          FractionBox["1", "2"], "\[LessEqual]", "x", "\[LessEqual]", "1"}]},
+        {"0", 
+         RowBox[{"x", ">", "1"}]}
+       },
+       AllowedDimensions->{2, Automatic},
+       Editable->True,
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+         "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.84]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}},
+       Selectable->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxItemSize->{
+     "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.35]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   "Piecewise",
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False]}]], "Input",
+ CellChangeTimes->{{3.687410286665874*^9, 3.687410411693115*^9}},
+ CellLabel->
+  "In[132]:=",ExpressionUUID->"3357c96c-31f9-4181-bf65-c9a114647714"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Animate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", "2"], 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"x", "+", "t"}], "]"}], " ", "+", " ", 
+        RowBox[{"f", "[", 
+         RowBox[{"x", "-", "t"}], "]"}]}], ")"}]}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"-", "10"}], ",", "10"}], "}"}], ",", " ", 
+     RowBox[{"PlotRange", "\[Rule]", "2"}], ",", " ", 
+     RowBox[{"PlotPoints", "\[Rule]", "1000"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", "10"}], "}"}], ",", " ", 
+   RowBox[{"AnimationRunning", "\[Rule]", "False"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.687410424079721*^9, 3.687410551260151*^9}, {
+  3.687410646295046*^9, 3.687410670630354*^9}, {3.687410879773981*^9, 
+  3.6874108988132553`*^9}},
+ CellLabel->
+  "In[133]:=",ExpressionUUID->"3cf981eb-7ae6-468c-b022-bb52d503006a"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`t$$ = 6.883862495422363, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`t$$], 0, 10}}, Typeset`size$$ = {450., {143., 149.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`t$24967$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`t$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`t$$, $CellContext`t$24967$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Plot[(1/2) ($CellContext`f[$CellContext`x + $CellContext`t$$] + \
+$CellContext`f[$CellContext`x - $CellContext`t$$]), {$CellContext`x, -10, 10},
+         PlotRange -> 2, PlotPoints -> 1000], 
+      "Specifications" :> {{$CellContext`t$$, 0, 10, AnimationRunning -> 
+         False, AppearanceElements -> {
+          "ProgressSlider", "PlayPauseButton", "FasterSlowerButtons", 
+           "DirectionButton"}}}, 
+      "Options" :> {
+       ControlType -> Animator, AppearanceElements -> None, DefaultBaseStyle -> 
+        "Animate", DefaultLabelStyle -> "AnimateLabel", SynchronousUpdating -> 
+        True, ShrinkingDelay -> 10.}, "DefaultOptions" :> {}],
+     ImageSizeCache->{505., {188., 195.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Animate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.687410536412986*^9, 3.687410551910087*^9}, {
+   3.687410654049329*^9, 3.6874106712910137`*^9}, 3.687410909875636*^9, 
+   3.785506764084999*^9},
+ CellLabel->
+  "Out[133]=",ExpressionUUID->"ce47cea7-315f-4ecf-84ab-53d5d1f9becf"]
+}, Open  ]]
+},
+WindowSize->{983, 753},
+WindowMargins->{{Automatic, 107}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2042, 57, 122, "Input",ExpressionUUID->"3357c96c-31f9-4181-bf65-c9a114647714"],
+Cell[CellGroupData[{
+Cell[2625, 81, 1035, 27, 154, "Input",ExpressionUUID->"3cf981eb-7ae6-468c-b022-bb52d503006a"],
+Cell[3663, 110, 2305, 45, 440, "Output",ExpressionUUID->"ce47cea7-315f-4ecf-84ab-53d5d1f9becf"]
+}, Open  ]]
+}
+]
+*)
+

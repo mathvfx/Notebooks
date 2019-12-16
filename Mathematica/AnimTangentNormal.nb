@@ -1,0 +1,177 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6774,        169]
+NotebookOptionsPosition[      6201,        153]
+NotebookOutlinePosition[      6541,        168]
+CellTagsIndexPosition[      6498,        165]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.616271067399331*^9, 3.616271075676772*^9}},
+ CellLabel->"In[75]:=",ExpressionUUID->"1ff9638d-c3d7-468f-b67b-e4265e83d433"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], " ", ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", 
+       SuperscriptBox["x", "5"]}], "-", 
+      RowBox[{"5", 
+       SuperscriptBox["x", "3"]}], " ", "-", " ", 
+      RowBox[{
+       FractionBox["1", "11"], "x"}]}], ")"}], "*", "0.5"}], " ", "+", " ", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"x", "-", "1"}]], " ", "-", " ", "1"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"myTangent", "[", "a_", "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "'"}], "[", "a", "]"}], 
+    RowBox[{"(", 
+     RowBox[{"x", "-", "a"}], ")"}]}], "+", 
+   RowBox[{"f", "[", "a", "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"myNormal", "[", "a_", "]"}], " ", ":=", 
+  RowBox[{
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"x", "-", "a"}], 
+     RowBox[{
+      RowBox[{"f", "'"}], "[", "a", "]"}]]}], "+", 
+   RowBox[{"f", "[", "a", "]"}]}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6162437085283337`*^9, 3.616243842482242*^9}, {
+   3.6162440950123453`*^9, 3.616244526319584*^9}, {3.616244578121039*^9, 
+   3.616244793226109*^9}, {3.616244847706292*^9, 3.61624484912484*^9}, {
+   3.6162448830432796`*^9, 3.616244929761469*^9}, 3.616244965884015*^9, {
+   3.6162450236033173`*^9, 3.616245071506864*^9}, {3.616245109977552*^9, 
+   3.616245126136805*^9}, {3.616246888486973*^9, 3.616246900382679*^9}, {
+   3.616247079418817*^9, 3.616247116433654*^9}, {3.616247329449552*^9, 
+   3.6162473388038483`*^9}, {3.6162710509310102`*^9, 3.616271054334919*^9}, {
+   3.616271212540142*^9, 3.61627136959507*^9}, {3.6162715245507517`*^9, 
+   3.61627152854926*^9}, {3.616272185953697*^9, 3.616272712196226*^9}},
+ CellLabel->"In[76]:=",ExpressionUUID->"9f5ffda8-f88c-4023-ab22-8832cb004214"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"anim", " ", "=", " ", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Plot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"f", "[", "x", "]"}], ",", " ", 
+           RowBox[{"myTangent", "[", "a", "]"}], ",", " ", 
+           RowBox[{"myNormal", "[", "a", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", " ", 
+           RowBox[{"-", "2"}], ",", " ", "2"}], "}"}], " ", ",", 
+         RowBox[{"PlotRange", "\[Rule]", " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "2"}], ",", " ", "2"}], "}"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AspectRatio", "\[Rule]", " ", "Automatic"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ImageSize", "\[Rule]", " ", "400"}], ",", " ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PlotStyle", "\[Rule]", " ", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", " ", "Dashed", ",", " ", "Dashed"}], "}"}]}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotLegends", "\[Rule]", " ", 
+          RowBox[{"Placed", "[", 
+           RowBox[{"\"\<Expressions\>\"", ",", " ", "Below"}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PlotLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"f", "[", "x", "]"}], ","}], " ", "}"}]}], ",", " ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Epilog", "\[Rule]", " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"PointSize", "[", "0.01", "]"}], ",", " ", "Red", ",", 
+            " ", 
+            RowBox[{"Point", "[", 
+             RowBox[{"{", 
+              RowBox[{"a", ",", " ", 
+               RowBox[{"f", "[", "a", "]"}]}], "}"}], "]"}]}], "}"}]}]}], 
+        "\[IndentingNewLine]", "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"a", ",", " ", 
+         RowBox[{"-", "1.5"}], ",", " ", "1.5", ",", " ", 
+         FractionBox["2.4", 
+          RowBox[{"24", "*", "2.75"}]]}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}]}], ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6162449794891167`*^9, 3.61624501008811*^9}, {
+  3.616271105301291*^9, 3.616271191926539*^9}, {3.616271380267927*^9, 
+  3.616271400636009*^9}, {3.616271431329486*^9, 3.616271443237747*^9}, {
+  3.616271533374468*^9, 3.6162716180826063`*^9}, {3.616271933846665*^9, 
+  3.616271941629685*^9}, {3.61627198998085*^9, 3.616271990396388*^9}, {
+  3.616272735519033*^9, 3.616272756739586*^9}, {3.6162728017432737`*^9, 
+  3.616272810267877*^9}, {3.61627284439753*^9, 3.61627285663008*^9}, {
+  3.616272916218771*^9, 3.616272952344586*^9}},
+ CellLabel->"In[79]:=",ExpressionUUID->"5d86ec12-fd6c-4d5f-9f73-1c4cb5c005a3"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+   "MyDirectory", "=", "\"\<~/Documents/mathematica/LearningBasic\>\""}], ";",
+    "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"MyDirectory", ",", "\"\<AnimTangentNormal.gif\>\""}], "}"}], 
+      "]"}], ",", " ", "anim"}], "]"}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.616271625752442*^9, 3.616271653771496*^9}, {
+  3.616271691106991*^9, 3.616271715634671*^9}, {3.6162717462078733`*^9, 
+  3.616271897054614*^9}, {3.616273053451662*^9, 3.616273055768776*^9}, {
+  3.785506366990066*^9, 3.7855063867734632`*^9}},
+ CellLabel->"In[80]:=",ExpressionUUID->"ebdcd3e2-9a41-4848-973f-04185c9d1ca2"]
+},
+WindowSize->{1044, 732},
+WindowMargins->{{32, Automatic}, {-146, Automatic}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 221, 3, 30, "Input",ExpressionUUID->"1ff9638d-c3d7-468f-b67b-e4265e83d433"],
+Cell[782, 25, 1822, 43, 129, "Input",ExpressionUUID->"9f5ffda8-f88c-4023-ab22-8832cb004214"],
+Cell[2607, 70, 2853, 63, 315, "Input",ExpressionUUID->"5d86ec12-fd6c-4d5f-9f73-1c4cb5c005a3"],
+Cell[5463, 135, 734, 16, 86, "Input",ExpressionUUID->"ebdcd3e2-9a41-4848-973f-04185c9d1ca2"]
+}
+]
+*)
+
