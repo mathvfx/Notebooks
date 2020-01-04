@@ -1,5 +1,10 @@
 #!env python
 
+#TODO:
+# 1. Implement node search
+# 2. Subtree attachments
+# 3. Code verification for correctness
+
 from abstract_base.tree_binary import BinaryTree
 
 class LinkedBinaryTree(BinaryTree):
@@ -92,7 +97,7 @@ class LinkedBinaryTree(BinaryTree):
             count += 1
         return count
 
-    #-------------------------------------------------------------------------
+    #--------------------------------------------------------------------------
     # Adding private Mutators specific to LinkedBinaryTree ADT
 
     def _add_root(self, elem) -> Position:
@@ -119,23 +124,31 @@ class LinkedBinaryTree(BinaryTree):
         return self._node_to_position(node._right)
 
     def _replace(self, p: Position, elem):
-        '''Replacing elements of a node in a tree'''
+        '''Replacing elements of a node in tree without changing position.
+           
+           Return p's original element.
+        '''
         node = self._position_to_node(p)
         old = node._elem
         node._elem = elem
         return old
 
     def _delete(self, p: Position):
-        '''Delete a particular node with at most 1 child'''
+        '''Remove node Position p (with at most 1 child) from the tree.
+           Restriction of "at most one child" is due to the fact that binary 
+           tree cannot have more than two children for each node.
+
+           Return p's element.
+        '''
         node = self._position_to_node(p)
         if self.num_children(p) == 2:
-            raise ValueError("Cannot remove p with two children")
-        child = node._left if node._left else node._right # Could be None
+            raise ValueError("p has two children. Cannot remove.")
+        child = node._left if node._left else node._right # child could be None
         if child is not None:
-            child._parent = node._parent
-        if node is self._root:
-            self._root = child # Child becomes root
-        else:
+            child._parent = node._parent # node._parent could be None
+        if node is self._root: # root-node case
+            self._root = child 
+        else:  # leaf-node case
             parent = node._parent
             if node is parent._left:
                 parent._left = child
@@ -145,10 +158,24 @@ class LinkedBinaryTree(BinaryTree):
         node._parent = node
         return node._elem
 
-    #TODO
-    def _attach(self, p, t1, t2):
-        '''TO BE IMPLEMENTED YET'''
-        pass
+    def _attach(self, p: Position, t: BinaryTree):
+        '''Attach BinaryTree t to node position p if child slot is available.
+        '''
+        node = self._position_to_node(p) # additional verifications within
+        if self.num_chilren(p) > 1:
+            raise ValueError('Position p have no available slot.')
+        if not type(self) is type(t):
+            raise TypeError("Tree types must match")
+        self._size += len(t)
+        if not t.is_empty():
+            t._root._parent = node # attach tree t to current position p
+            if node._left is None:
+                node._left = t._root
+            else:
+                node._right = t._root
+            # Tree t is no longer "has" root or size of its own
+            t._root = None  
+            t._size = 0    
 
     #--------------------------------------------------------------------------
     # Adding basic public methods for tree constructions and traversal
@@ -160,7 +187,7 @@ class LinkedBinaryTree(BinaryTree):
         assert len(build_list) > 0 # Temporary line. Lazy.
         L = build_list[::-1] # Shallow copy in reverse
         root = self._add_root(L.pop())
-        levels = [root] #deque
+        levels = [root] # queue
         while len(L) > 0:
             node = levels.pop(0) # dequeue
             left_node = self._add_left_child(node, L.pop())
@@ -170,7 +197,7 @@ class LinkedBinaryTree(BinaryTree):
             levels.extend([left_node, right_node]) #enqueue
 
     def build_bst(self, build_list: list):
-        '''Build Binary Search Tree data struture in in-order sequence.
+        '''Build Binary Search Tree data struture.
            First element of build_list is considered as root of the tree.
         '''
         assert len(build_list) > 0 # Temporary line. Lazy.
@@ -190,22 +217,19 @@ class LinkedBinaryTree(BinaryTree):
             _insert(root, build_list[idx])
 
     def traverse_breadth_first(self, p: Position = None) -> iter:
-        '''Traverse Binary Tree in Breadth-First Search Order.'''
+        '''Breadth-first binary tree traversal starting from node Position p.
+        '''
         root = self.root() if p is None else p
-        levels = [root] # deque
+        levels = [root] # queue
         while levels:
             node = levels.pop(0) # dequeue
             yield node.element() # visited
             for c in self.children(node):
                 levels.append(c) # enqueue
 
-    #TODO
-    def traverse_depth_first(self, p: Position = None) -> iter:
-        pass
-
     def traverse_preorder(self, p: Position = None) -> iter:
-        '''Traverse Binary Tree in Pre-Order. Roughly speaking, visit root then
-           all other children.
+        '''Depth-first binary tree traversal in pre-order starting from node p. 
+           Roughly speaking, visit root then all other children.
         '''
         def _pre(root):
             yield root.element()
@@ -218,8 +242,8 @@ class LinkedBinaryTree(BinaryTree):
                 yield position
 
     def traverse_postorder(self, p: Position = None) -> iter:
-        '''Traverse Binary Tree in Post-Order. Roughly speaking, visit all 
-           children then root.
+        '''Depth-first binary tree traversal in post-order starting from node p. 
+           Roughly speaking, visit all children then root.
         '''
         def _post(root):
             for c in self.children(root):
@@ -232,8 +256,9 @@ class LinkedBinaryTree(BinaryTree):
                 yield position
 
     def traverse_inorder(self, p: Position = None) -> iter:
-        '''Traverse Binary Tree in In-Order. Roughly speaking, visit left-most 
-           child, then root, then remaining children.
+        '''Depth-first binary tree traversal in in-order starting from node p. 
+           Roughly speaking, visit left-most child, then root, then remaining 
+           children.
         '''
         def _inorder(root):
             if self.left_child(root):
