@@ -2,13 +2,12 @@
 
 #TODO:
 # 1. Implement node search
-# 2. Subtree attachments
-# 3. Code verification for correctness
+# 2. Code verification for correctness
 
 from abstract_base.tree_binary import BinaryTree
 
 class LinkedBinaryTree(BinaryTree):
-    '''Simple Binary Tree implemented with Linked-List'''
+    '''Simple Binary Tree ADT implemented with Linked-List'''
     class Node:
         # NOTE 'self' here is Node container
         __slots__ = ("_parent", "_left", "_right", "_elem")
@@ -41,6 +40,14 @@ class LinkedBinaryTree(BinaryTree):
             # and both node is the same node.
             return type(other) is type(self) and other._node is self._node
 
+    def __init__(self):
+        self._root = None
+        self._size = 0
+
+    def __len__(self):
+        # Override Tree ABC
+        return self._size
+
     def _position_to_node(self, p: Position) -> Node:
         '''Convert Position object to Node object'''
         if not isinstance(p, self.Position):
@@ -54,18 +61,6 @@ class LinkedBinaryTree(BinaryTree):
     def _node_to_position(self, node: Node) -> BinaryTree.Position:
         '''Convert Node object to Position object'''
         return self.Position(self, node) if node else None
-
-    #--------------------------------------------------------------------------
-    # Overrides Tree and BinaryTree ABC. These are Accessors.
-
-    def __init__(self):
-        self._root = None
-        self._size = 0
-
-    def __len__(self):
-        return self._size
-        # Note this wasn't specified in Tree ABC because we don't know how 
-        # "size" (length) will be defined there.
 
     def root(self) -> Position:
         # Override Tree ABC
@@ -98,7 +93,7 @@ class LinkedBinaryTree(BinaryTree):
         return count
 
     #--------------------------------------------------------------------------
-    # Adding private Mutators specific to LinkedBinaryTree ADT
+    # Adding private mutators specific to LinkedBinaryTree ADT
 
     def _add_root(self, elem) -> Position:
         if self._root is not None:
@@ -271,42 +266,3 @@ class LinkedBinaryTree(BinaryTree):
         root = self.root() if p is None else p
         for position in _inorder(root):
             yield position
-
-def test_case_bfs_tree():
-    L = [_ for _ in range(100, 220, 10)]
-    T = LinkedBinaryTree()
-    T.build_bfs_tree(L)
-    out_bfs = tuple(_ for _ in T.traverse_breadth_first())
-    out_inorder = tuple(_ for _ in T.traverse_inorder())
-    out_preorder = tuple(_ for _ in T.traverse_preorder())
-    out_postorder = tuple(_ for _ in T.traverse_postorder())
-    print(f"Original List: {L}")
-    print(f"BFS Order: {out_bfs}")
-    print(f"Inorder: {out_inorder}")
-    print(f"Preorder: {out_preorder}")
-    print(f"Postorder: {out_postorder}")
-    print(f"Total Nodes: {len(T)}")
-    print(f"Tree Height: {T.height()}")
-    print()
-
-def test_case_bst():
-    from random import randrange
-    L = [randrange(10, 99) for _ in range(12)]
-    T = LinkedBinaryTree()
-    T.build_bst(L)
-    out_bfs = tuple(_ for _ in T.traverse_breadth_first())
-    out_inorder = tuple(_ for _ in T.traverse_inorder())
-    out_preorder = tuple(_ for _ in T.traverse_preorder())
-    out_postorder = tuple(_ for _ in T.traverse_postorder())
-    print(f"Original List: {L}")
-    print(f"BFS Order: {out_bfs}")
-    print(f"Inorder: {out_inorder}")
-    print(f"Preorder: {out_preorder}")
-    print(f"Postorder: {out_postorder}")
-    print(f"Total Nodes: {len(T)}")
-    print(f"Tree Height: {T.height()}")
-    print()
-
-if __name__ == "__main__":
-    test_case_bfs_tree()
-    test_case_bst()
