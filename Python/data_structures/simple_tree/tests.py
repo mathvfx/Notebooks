@@ -1,7 +1,7 @@
 #env python
 
 from random import randrange, seed
-from LinkedBinaryTree import LinkedBinaryTree
+from ADT_LinkedBinaryTree import LinkedBinaryTree
 
 def test_case_bfs_tree():
     L = [_ for _ in range(100, 220, 10)]
