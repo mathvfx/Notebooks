@@ -1,46 +1,85 @@
 #!env python
 
 from ADT_Queue import ArrayQueue, LinkedQueue
-from ADT_Stack import ArrayStack
+from ADT_Stack import ArrayStack, LinkedStack
 
     
 def test_ArrayStack():
-    print("~~~~~~~~~~~~~~~ Testing basic stack operations ~~~~~~~~~~~~~~~")
-    S = ArrayStack()
+    print(" >> Testing ArrayStack ADT")
+    L = [333, 444, 555]
+    print(f" >> Build ArrayStack and initialize with {L}")
+    S = ArrayStack(L)
+    print(" >> Pushing 10, 20, 30")
     S.push(10)
     S.push(20)
     S.push(30)
     print(S)
     print(f"S.pop(): {S.pop()}")
+    print(" >> Pushing 40, and __iadd__ 100")
     S.push(40)
     S += 100
     print(f"S.top(): {S.top()}")
+    print(" >> Pushing 50")
     S.push(50)
     print(f"Current stack length: {len(S)}")
+    print(S)
+    print("...now reverse this stack")
+    S.reverse()
+    print(S)
+    print()
+
+def test_LinkedStack():
+    print(" >> Testing LinkedStack ADT") 
+    L = [333, 444, 555]
+    print(f" >> Build LinkedStack and initialize with {L}")
+    S = LinkedStack(L)
+    print(" >> Pushing 10, 20, 30")
+    S.push(10)
+    S.push(20)
+    S.push(30)
+    print(S)
+    print(f"S.pop(): {S.pop()}")
+    print(" >> Pushing 40, and __iadd__ 100")
+    S.push(40)
+    S += 100
+    print(f"S.top(): {S.top()}")
+    print(" >> Pushing 50")
+    S.push(50)
+    print(f"Current stack length: {len(S)}")
+    print(S)
+    print("...now reverse this stack")
+    S.reverse()
     print(S)
     print()
 
 def test_ArrayQueue():
-    print("~~~~~~~~~~~~~~~ Testing ArrayQueue ADT ~~~~~~~~~~~~~~~")
-    L = [300, 500, 700]
+    print(" >> Testing ArrayQueue ADT")
+    L = [333, 555, 777]
+    print(f" >> Build ArrayQueue and initialize with {L}")
     Q = ArrayQueue(L)
+    print(" >> Enqueue 10, 20, 30")
     Q.enqueue(10)
     Q.enqueue(20)
     Q.enqueue(30)
     print(Q)
     print(f"Q.dequeue(): {Q.dequeue()}")
+    print(" >> Enqueue 40, and __iadd__ 100")
     Q.enqueue(40)
     Q += 100
     print(f"Q.first(): {Q.first()}")
+    print(" >> Enqueue 50")
     Q.enqueue(50)
     print(f"Current Queue Length: {len(Q)}")
-    Q.dequeue()
-    Q.dequeue()
+    print(f"Q.dequeue(): {Q.dequeue()}")
+    print(f"Q.dequeue(): {Q.dequeue()}")
+    print(" >> Enqueue 1000, 2000")
     Q.enqueue(1000)
     Q.enqueue(2000)
     print(Q)
+    print("...now reverse this queue")
     Q.reverse()
     print(Q)
+    print(" >> Enqueue 9")
     Q.enqueue(9)
     print(f"Q.first(): {Q.first()}")
     print(f"Q.dequeue(): {Q.dequeue()}")
@@ -48,26 +87,33 @@ def test_ArrayQueue():
     print()
 
 def test_LinkedQueue():
-    print("~~~~~~~~~~~~~~~ Testing LinkedQueue ADT ~~~~~~~~~~~~~~~") 
+    print(" >> Testing LinkedQueue ADT")
     L = [300, 500, 700]
+    print(f" >> Build LinkedQueue and initialize with {L}")
     Q = LinkedQueue(L)
+    print(" >> Enqueue 10, 20, 30")
     Q.enqueue(10)
     Q.enqueue(20)
     Q.enqueue(30)
     print(Q)
     print(f"Q.dequeue(): {Q.dequeue()}")
+    print(" >> Enqueue 40, and __iadd__ 100")
     Q.enqueue(40)
     Q += 100
     print(f"Q.first(): {Q.first()}")
+    print(" >> Enqueue 50")
     Q.enqueue(50)
     print(f"Current Queue Length: {len(Q)}")
-    Q.dequeue()
-    Q.dequeue()
+    print(f"Q.dequeue(): {Q.dequeue()}")
+    print(f"Q.dequeue(): {Q.dequeue()}")
+    print(" >> Enqueue 1000, 2000")
     Q.enqueue(1000)
     Q.enqueue(2000)
     print(Q)
+    print("...now reverse this queue")
     Q.reverse()
     print(Q)
+    print(" >> Enqueue 9")
     Q.enqueue(9)
     print(f"Q.first(): {Q.first()}")
     print(f"Q.dequeue(): {Q.dequeue()}")
@@ -75,6 +121,11 @@ def test_LinkedQueue():
     print()
 
 if __name__ == "__main__":
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     test_ArrayStack()
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    test_LinkedStack()
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     test_ArrayQueue()
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     test_LinkedQueue()

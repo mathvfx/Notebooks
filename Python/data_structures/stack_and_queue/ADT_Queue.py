@@ -1,5 +1,9 @@
 #!env python
-
+#
+# Alex Lim. 2020. https://mathvfx.github.io
+# This Python code is intended as my own learning and programming exercises to 
+# become better software developer. It may not be robust enough for production.
+#
 # REFERENCES and CREDITS: 
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
 
@@ -39,6 +43,7 @@ class ArrayQueue(Queue):
 
     def dequeue(self):
         # Override Queue ABC
+        '''Return front/head element from the queue.'''
         if self.is_empty():
             raise Empty("Queue is empty. Cannot dequeue.")
         if 0 < self._size < len(self._data)//4:
@@ -53,6 +58,7 @@ class ArrayQueue(Queue):
         
     def enqueue(self, elem):
         # Override Queue ABC
+        '''Enqueing element to the back of the queue.'''
         if self._size == len(self._data):
             # doubling capacity if virtual size reached maximum capacity
             self._resize(2*len(self._data))
@@ -62,12 +68,13 @@ class ArrayQueue(Queue):
 
     def first(self):
         # Override Queue ABC
+        '''Return the next dequeue (head) element in the queue.'''
         if self.is_empty():
             return None
         return self._data[self._front]
 
     def reverse(self):
-        '''Reverse queue (in-place)'''
+        '''Reverse queue in-place'''
         if len(self) > 1:
             front_idx = self._front
             back_idx = front_idx + len(self) - 1
@@ -76,7 +83,7 @@ class ArrayQueue(Queue):
                         = self._data[back_idx - i], self._data[front_idx + i]
 
     def _resize(self, capacity: int):
-        '''Resize array and re-index old content'''
+        '''Resize array and re-index old list for amortized performance cost'''
         assert capacity >= 0
         orig_list = self._data
         walk = self._front # starting position of walk
@@ -130,6 +137,7 @@ class LinkedQueue(Queue):
     
     def dequeue(self):
         # Override Queue ABC
+        '''Return front/head element from the queue.'''
         if self.is_empty():
             raise Empty("Queue is empty. Cannot dequeue.")
         head = self._tail._next
@@ -142,6 +150,7 @@ class LinkedQueue(Queue):
 
     def enqueue(self, elem):
         # Override Queue ABC
+        '''Enqueing element to the back of the queue.'''
         new_node = self._Node(elem)
         if self.is_empty():
             new_node._next = new_node
@@ -153,21 +162,22 @@ class LinkedQueue(Queue):
 
     def first(self):
         # Override Queue ABC
+        '''Return the next dequeue (head) element in the queue.'''
         if self.is_empty():
             return None
         head = self._tail._next
         return head.element()
 
     def reverse(self):
-        '''Reverse queue (in-place'''
+        '''Reverse queue in-place'''
         if self.is_empty():
-            raise Empty("Queue is empty")
+            raise Empty("Queue is empty.")
         if self._size > 1:
             prev = self._tail
             head = self._tail._next
             walk = self._tail._next
             self._tail = walk
-            for i in range(len(self)):
+            for _ in range(len(self)):
                 walk = walk._next
                 head._next = prev
                 prev = head

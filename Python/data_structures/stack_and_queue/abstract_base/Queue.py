@@ -1,4 +1,10 @@
 #!env python
+#
+# Alex Lim. 2020. https://mathvfx.github.io
+# This Python code is intended as my own learning and programming exercises to 
+# become better software developer. It may not be robust enough for production.
+#
+
 from abc import ABCMeta, abstractmethod
 
 class Queue(metaclass=ABCMeta):
