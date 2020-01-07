@@ -1,25 +1,22 @@
 #!env python
 #
 # Alex Lim. 2020. https://mathvfx.github.io
-# This Python code is intended as my own learning and programming exercises to 
-# become better software developer. It may not be robust enough for production.
+# This Python code is intended as my own learning and programming exercises in 
+# effort to become a better software developer. 
 #
 # REFERENCES and CREDITS: 
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
 
+
 from abstract_base.Stack import Stack
+
 
 class Empty(Exception):
     pass
 
+
 class ArrayStack(Stack):
-    '''ArrayStack ADT implemented using python list as underlying storage.
-       
-       Potential issue with using Python list is that Python will generally 
-       allocate more memory than is needed in anticipation of append operations.
-       However, for simple array-based Stack, we simply utilize Python's List's
-       built-in efficient methods.
-    '''
+    '''ArrayStack ADT implemented using python list as underlying storage.'''
     def __init__(self, build_list: list = None):
         if build_list:
             self._data = [None] * len(build_list)
@@ -28,6 +25,11 @@ class ArrayStack(Stack):
         else:
             self._data = list()
 
+    def __contains__(self, key):
+        # Override Stack ABC
+        '''Return True if element 'key' is contained in Stack.'''
+        return (key in self._data)
+
     def __len__(self):
         # Override Stack ABC
         return len(self._data)
@@ -35,9 +37,24 @@ class ArrayStack(Stack):
     def __str__(self):
         return f" >> DEBUG ArrayStack [{len(self)}]: {self._data}*"
 
+    def index(self, elem) -> int:
+        '''Search for element 'elem' starting from top of the stack and 
+           return its first index found. This index value represents the number
+           of times Stack.pop() must be called to reach 'elem'.
+
+           Return None if element is not found.
+        '''
+        try:
+            array_index = self._data.index(elem)
+            return len(self) - array_index
+        except ValueError:
+            return None
+
     def pop(self):
         # Override Stack ABC
-        '''Remove and return element from the top of the stack'''
+        '''Remove and return element from the top of the stack.
+           Raise Empty error if empty.
+        '''
         if self.is_empty():
             raise Empty("Stack is empty")
         return self._data.pop()   # using list's pop method
@@ -48,6 +65,7 @@ class ArrayStack(Stack):
         self._data.append(elem)
 
     def reverse(self):
+        # Override Stack ABC
         '''Reverse stack in-place'''
         self._data.reverse()
 
@@ -82,6 +100,16 @@ class LinkedStack(Stack):
             for elem in build_list:
                 self += elem
 
+    def __contains__(self, key):
+        # Override Stack ABC
+        '''Return True if element 'key' is contained in Stack.'''
+        walk = self._head
+        while walk:
+            if key == walk.element():
+                return True
+            walk = walk._next
+        return False
+
     def __len__(self):
         # Override Stack ABC
         return self._size
@@ -98,9 +126,27 @@ class LinkedStack(Stack):
             walk = walk._next
         return f" >> DEBUG LinkedStack [{self._size}]: *{', '.join(node_list)}"
 
+    def index(self, elem):
+        '''Search for element 'elem' starting from top of the stack and 
+           return its first index found. This index value represents the number
+           of times Stack.pop() must be called to reach 'elem'.
+
+           Return None if element is not found.
+        '''
+        walk = self._head
+        idx = 1
+        while walk:
+            if elem == walk.element():
+                return idx
+            walk = walk._next
+            idx += 1
+        return None 
+
     def pop(self):
         # Override Stack ABC
-        '''Remove and return element from the top of the stack'''
+        '''Remove and return element from the top of the stack.
+           Raise Empty error if empty.
+        '''
         if self.is_empty():
             raise Empty("Stack is empty. Cannot pop.")
         elem = self._head._elem
@@ -115,6 +161,7 @@ class LinkedStack(Stack):
         self._size += 1
 
     def reverse(self):
+        # Override Stack ABC
         '''Reverse stack in-place'''
         if self.is_empty():
             raise Empty("Stack is empty.")

@@ -1,8 +1,8 @@
 #!env python
 #
 # Alex Lim. 2020. https://mathvfx.github.io
-# This Python code is intended as my own learning and programming exercises to 
-# become better software developer. It may not be robust enough for production.
+# This Python code is intended as my own learning and programming exercises in 
+# effort to become a better software developer. 
 #
 
 from abc import ABCMeta, abstractmethod
@@ -12,6 +12,10 @@ class Stack(metaclass=ABCMeta):
     @abstractmethod
     def __len__(self):
         ...
+
+    @abstractmethod
+    def __contains__(self, elem):
+        '''Return True if Stack contains "elem"'''
 
     @abstractmethod
     def push(self, elem):
@@ -24,6 +28,10 @@ class Stack(metaclass=ABCMeta):
     @abstractmethod
     def top(self):
         '''Return top element in the stack'''
+
+    @abstractmethod
+    def reverse(self):
+        '''Reverse stack''' 
 
     def __iadd__(self, elem):
         self.push(elem)
