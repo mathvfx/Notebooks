@@ -2,6 +2,7 @@
 
 from ADT_Queue import ArrayQueue, LinkedQueue
 from ADT_Stack import ArrayStack, LinkedStack
+from ADT_Deque import LinkedDeque
 
     
 def test_ArrayStack():
@@ -29,7 +30,11 @@ def test_ArrayStack():
     print(f"Which index is is 556? {S.index(556)}")
     print("...now reverse this stack")
     S.reverse()
+    print(" >> push 50")
+    S.push(50)
     print(S)
+    print(f"Occurrences of 50? {S.count(50)}")
+    print(f"Occurrences of 51? {S.count(51)}")
     print()
 
 def test_LinkedStack():
@@ -57,7 +62,11 @@ def test_LinkedStack():
     print(f"Which index is is 556? {S.index(556)}")
     print("...now reverse this stack")
     S.reverse()
+    print(" >> push 50")
+    S.push(50)
     print(S)
+    print(f"Occurrences of 50? {S.count(50)}")
+    print(f"Occurrences of 51? {S.count(51)}")
     print()
 
 def test_ArrayQueue():
@@ -95,7 +104,11 @@ def test_ArrayQueue():
     Q.enqueue(9)
     print(f"Q.first(): {Q.first()}")
     print(f"Q.dequeue(): {Q.dequeue()}")
+    print(" >> Enqueue 50")
+    Q.enqueue(50)
     print(Q)
+    print(f"Occurrences of 50? {Q.count(50)}")
+    print(f"Occurrences of 51? {Q.count(51)}")
     print()
 
 def test_LinkedQueue():
@@ -133,7 +146,44 @@ def test_LinkedQueue():
     Q.enqueue(9)
     print(f"Q.first(): {Q.first()}")
     print(f"Q.dequeue(): {Q.dequeue()}")
+    print(" >> Enqueue 50")
+    Q.enqueue(50)
     print(Q)
+    print(f"Occurrences of 50? {Q.count(50)}")
+    print(f"Occurrences of 51? {Q.count(51)}")
+    print(Q)
+    print()
+
+def test_LinkedDeque():
+    print(" >> Test LinkedDeque ADT")
+    L = [300, 500, 700]
+    print(f" >> Build LinkedDeque and initialize with {L}")
+    D = LinkedDeque(L)
+    print(" >> enqueue 10, 20, 30")
+    D.enqueue(10)
+    D.enqueue(20)
+    D.enqueue(30)
+    print(" >> enqueue_back -10, -20")
+    D.enqueue_back(-10)
+    D.enqueue_back(-20)
+    print(D)
+    print(f"D.dequeue(): {D.dequeue()}")
+    print(f"D.dequeue_back(): {D.dequeue_back()}")
+    print(D)
+    print(f"D.front(): {D.front()}")
+    print(f"D.back(): {D.back()}")
+    print(f"Does D contains 700? {700 in D}")
+    print(f"Does D contains 702? {702 in D}")
+    D.enqueue(777)
+    print(D)
+    D.rotate(3)
+    print(D)
+    D.reverse()
+    print(" >> enqueue 300")
+    D.enqueue(300)
+    print(D)
+    print(f"Occurrences of 300? {D.count(300)}")
+    print(f"Occurrences of 301? {D.count(301)}")
     print()
 
 if __name__ == "__main__":
@@ -145,3 +195,5 @@ if __name__ == "__main__":
     test_ArrayQueue()
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     test_LinkedQueue()
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    test_LinkedDeque()

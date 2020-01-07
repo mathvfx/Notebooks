@@ -1,8 +1,7 @@
 #!env python
 #
 # Alex Lim. 2020. https://mathvfx.github.io
-# This Python code is intended as my own learning and programming exercises in 
-# effort to become a better software developer. 
+# This Python code is intended as my own learning and programming exercises. 
 #
 # REFERENCES and CREDITS: 
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
@@ -36,6 +35,10 @@ class ArrayStack(Stack):
 
     def __str__(self):
         return f" >> DEBUG ArrayStack [{len(self)}]: {self._data}*"
+
+    def count(self, elem) -> int:
+        '''Return the number of occurrences of element "elem" in the stack'''
+        return self._data.count(elem)
 
     def index(self, elem) -> int:
         '''Search for element 'elem' starting from top of the stack and 
@@ -73,7 +76,8 @@ class ArrayStack(Stack):
         # Override Stack ABC
         '''Return the next element to be popped from stack'''
         if self.is_empty():
-            return None
+            # Can't use None becuase it may be a valid object.
+            raise Empty("Stack is empty.")
         return self._data[-1]
 
 
@@ -125,6 +129,16 @@ class LinkedStack(Stack):
             idx += 1
             walk = walk._next
         return f" >> DEBUG LinkedStack [{self._size}]: *{', '.join(node_list)}"
+
+    def count(self, elem) -> int:
+        '''Return the number of occurrences of element "elem" in the stack'''
+        walk = self._head
+        ans = 0
+        for _ in range(self._size):
+            if walk.element() == elem:
+                ans += 1
+            walk = walk._next
+        return ans
 
     def index(self, elem):
         '''Search for element 'elem' starting from top of the stack and 
@@ -181,5 +195,6 @@ class LinkedStack(Stack):
         # Override Stack ABC
         '''Return the next element to be popped from stack'''
         if self.is_empty():
-            return None
+            # Can't use None becuase it may be a valid object.
+            raise Empty("Stack is empty.")
         return self._head._elem

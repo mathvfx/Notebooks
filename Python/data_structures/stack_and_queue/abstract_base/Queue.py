@@ -1,8 +1,7 @@
 #!env python
 #
 # Alex Lim. 2020. https://mathvfx.github.io
-# This Python code is intended as my own learning and programming exercises in 
-# effort to become a better software developer. 
+# This Python code is intended as my own learning and programming exercises. 
 #
 
 from abc import ABCMeta, abstractmethod

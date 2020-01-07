@@ -1,4 +1,9 @@
 #!env python
+#
+# Alex Lim. 2020. https://mathvfx.github.io
+# This Python code is intended as my own learning and programming exercises. 
+#
+
 from abc import ABCMeta, abstractmethod
 
 class DEQue(metaclass=ABCMeta):
@@ -10,32 +15,40 @@ class DEQue(metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def append_back(self, elem):
+    def __contains__(self, elem):
+        '''Return True if Deque contains "elem"'''
+
+    @abstractmethod
+    def back(self):
+        '''Return last element of the queue.'''
+
+    @abstractmethod
+    def dequeue(self):
+        '''Remove and return last element of the queue.'''
+
+    @abstractmethod
+    def dequeue_back(self):
+        '''Remove and return first element of the queue.'''
+
+    @abstractmethod
+    def enqueue(self, elem):
         '''Add elem to the back of the queue. 
            Meaning of "back" is equivalent to index n of n-sized array.
         '''
 
     @abstractmethod
-    def append_front(self, elem):
+    def enqueue_back(self, elem):
         '''Add elem to the front of the queue. 
            Meaning of "front" is equivalent to index 0 of n-sized array.
         '''
 
     @abstractmethod
-    def pop_back(self):
-        '''Remove and return last element of the queue.'''
-
-    @abstractmethod
-    def pop_front(self):
-        '''Remove and return first element of the queue.'''
-
-    @abstractmethod
-    def first(self):
+    def front(self):
         '''Return first element of the queue.'''
 
     @abstractmethod
-    def last(self):
-        '''Return last element of the queue.'''
+    def reverse(self):
+        '''Reverse queue'''
 
     def is_empty(self):
         return len(self) == 0

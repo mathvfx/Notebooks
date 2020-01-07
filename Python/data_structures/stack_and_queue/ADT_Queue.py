@@ -1,8 +1,7 @@
 #!env python
 #
 # Alex Lim. 2020. https://mathvfx.github.io
-# This Python code is intended as my own learning and programming exercises in 
-# effort to become a better software developer. 
+# This Python code is intended as my own learning and programming exercises. 
 #
 # REFERENCES and CREDITS: 
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
@@ -48,6 +47,10 @@ class ArrayQueue(Queue):
             return " >> DEBUG ArrayQueue is empty."
         return f" >> DEBUG ArrayQueue {len(self)}: {self._data}"
 
+    def count(self, elem) -> int:
+        '''Return the number of occurrences of element "elem" in the queue'''
+        return self._data.count(elem)
+
     def dequeue(self):
         # Override Queue ABC
         '''Return front/head element from the queue.'''
@@ -75,9 +78,12 @@ class ArrayQueue(Queue):
 
     def first(self):
         # Override Queue ABC
-        '''Return the next dequeue (head) element in the queue.'''
+        '''Return the next dequeue (head) element in the queue.
+           Raise Empty exception if Queue is empty.
+        '''
         if self.is_empty():
-            return None
+            # Can't use None becuase it may be a valid object.
+            raise Empty("Queue is empty.")
         return self._data[self._front]
 
     def index(self, elem) -> int:
@@ -167,6 +173,16 @@ class LinkedQueue(Queue):
             node_list[idx] = str(head.element())
             head = head._next
         return f" >> DEBUG LinkedQueue [{len(self)}]: {', '.join(node_list)}"
+
+    def count(self, elem) -> int:
+        '''Return the number of occurrences of element "elem" in the queue'''
+        walk = self._tail._next
+        ans = 0
+        for _ in range(self._size):
+            if walk.element() == elem:
+                ans += 1
+            walk = walk._next
+        return ans
     
     def dequeue(self):
         # Override Queue ABC
@@ -197,7 +213,8 @@ class LinkedQueue(Queue):
         # Override Queue ABC
         '''Return the next dequeue (head) element in the queue.'''
         if self.is_empty():
-            return None
+            # Can't use None becuase it may be a valid object.
+            raise Empty("Queue is empty.")
         head = self._tail._next
         return head.element()
 
