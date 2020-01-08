@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     11034,        291]
-NotebookOptionsPosition[      9116,        249]
-NotebookOutlinePosition[      9451,        264]
-CellTagsIndexPosition[      9408,        261]
+NotebookDataLength[      6659,        163]
+NotebookOptionsPosition[      5630,        142]
+NotebookOutlinePosition[      5965,        157]
+CellTagsIndexPosition[      5922,        154]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -48,8 +48,6 @@ Cell["\<\
  CellChangeTimes->{{3.735331219697353*^9, 3.73533126318342*^9}, 
    3.7353333976391907`*^9},ExpressionUUID->"bfa1b64f-13e6-416c-96b4-\
 5e78c9643d79"],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
@@ -112,38 +110,10 @@ Cell[BoxData[{
    3.735413687678194*^9}},
  CellLabel->"In[81]:=",ExpressionUUID->"4e90f3a6-4fd7-4764-9921-8108b9556a97"],
 
-Cell[BoxData["\<\"MyContext`\"\>"], "Output",
- CellChangeTimes->{{3.7354136757605457`*^9, 3.735413691193943*^9}, 
-   3.785506549831526*^9},
- CellLabel->"Out[81]=",ExpressionUUID->"32d5ea66-4477-4e6d-9b31-b8805574e993"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"MyGenerator", "[", "23", "]"}]], "Input",
  CellChangeTimes->{{3.7353333238964567`*^9, 3.735333328647478*^9}},
  CellLabel->"In[83]:=",ExpressionUUID->"8769fbd8-524f-4aa4-bc25-1b3a08046ea0"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"List of Generators:  \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "5", ",", "7", ",", "10", ",", "11", ",", "14", ",", "15", ",", "17", ",",
-      "19", ",", "20", ",", "21"}], "}"}]}],
-  SequenceForm[
-  "List of Generators:  ", {5, 7, 10, 11, 14, 15, 17, 19, 20, 21}],
-  Editable->False]], "Print",
- CellChangeTimes->{
-  3.735333328961987*^9, 3.7353337793124638`*^9, 3.73533387662387*^9, {
-   3.73541367607131*^9, 3.735413691360076*^9}, 3.785506549946185*^9},
- CellLabel->
-  "During evaluation of \
-In[83]:=",ExpressionUUID->"efb86a5a-d548-4707-a4df-d375b38363b5"]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"MyGenerator", "[", "17", "]"}]], "Input",
@@ -151,45 +121,9 @@ Cell[BoxData[
  CellLabel->"In[84]:=",ExpressionUUID->"8605c221-a253-4928-a0ec-1039f557074c"],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"List of Generators:  \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "3", ",", "5", ",", "6", ",", "7", ",", "10", ",", "11", ",", "12", ",", 
-     "14"}], "}"}]}],
-  SequenceForm["List of Generators:  ", {3, 5, 6, 7, 10, 11, 12, 14}],
-  Editable->False]], "Print",
- CellChangeTimes->{
-  3.7353333331477823`*^9, 3.7353337811631317`*^9, 3.7353338805543613`*^9, {
-   3.735413676135521*^9, 3.7354136914438457`*^9}, 3.7855065499554367`*^9},
- CellLabel->
-  "During evaluation of \
-In[84]:=",ExpressionUUID->"7e608314-9cbd-42c0-ae0d-aceecc6f9e3e"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
  RowBox[{"MyGenerator", "[", "5", "]"}]], "Input",
  CellChangeTimes->{{3.7353333238964567`*^9, 3.735333337215343*^9}},
  CellLabel->"In[85]:=",ExpressionUUID->"251fa27e-4783-48ae-8b05-aedead693072"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"List of Generators:  \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"2", ",", "3"}], "}"}]}],
-  SequenceForm["List of Generators:  ", {2, 3}],
-  Editable->False]], "Print",
- CellChangeTimes->{
-  3.73533333761611*^9, 3.7353337834087677`*^9, 3.73533388300721*^9, {
-   3.735413676201524*^9, 3.735413691511644*^9}, 3.7855065500059233`*^9},
- CellLabel->
-  "During evaluation of \
-In[85]:=",ExpressionUUID->"522d49a9-fd03-422a-8307-a4f685559aad"]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"MyGenerator", "[", "7", "]"}]], "Input",
@@ -197,55 +131,14 @@ Cell[BoxData[
  CellLabel->"In[86]:=",ExpressionUUID->"2da838f4-aeb5-4e3a-9a82-f3e83ea11e2c"],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"List of Generators:  \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"3", ",", "5"}], "}"}]}],
-  SequenceForm["List of Generators:  ", {3, 5}],
-  Editable->False]], "Print",
- CellChangeTimes->{
-  3.735333353185318*^9, 3.73533378529463*^9, 3.735333885276712*^9, {
-   3.7354136762675447`*^9, 3.73541369159382*^9}, 3.7855065500187073`*^9},
- CellLabel->
-  "During evaluation of \
-In[86]:=",ExpressionUUID->"93736b53-660b-43ae-92c3-a8985bb2bf5a"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
  RowBox[{"MyGenerator", "[", "13", "]"}]], "Input",
  CellChangeTimes->{{3.735333591170198*^9, 3.735333593686788*^9}},
  CellLabel->"In[87]:=",ExpressionUUID->"40eee8e1-d6c7-46fe-80e0-c4e3c6bb8ab8"],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"List of Generators:  \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"2", ",", "5", ",", "6", ",", "7", ",", "8", ",", "11"}], "}"}]}],
-  
-  SequenceForm["List of Generators:  ", {2, 5, 6, 7, 8, 11}],
-  Editable->False]], "Print",
- CellChangeTimes->{
-  3.735333594023085*^9, 3.735333787425123*^9, 3.735333886756855*^9, {
-   3.735413676333926*^9, 3.735413691658703*^9}, 3.785506550064982*^9},
- CellLabel->
-  "During evaluation of \
-In[87]:=",ExpressionUUID->"c040f8cc-6328-4ac4-b77f-671c75dc0836"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
  RowBox[{"End", "[", "]"}]], "Input",
  CellChangeTimes->{{3.7354136654330187`*^9, 3.7354136666577587`*^9}},
- CellLabel->"In[88]:=",ExpressionUUID->"5007f3fd-ff47-4809-8bdd-2a01602f442c"],
-
-Cell[BoxData["\<\"MyContext`\"\>"], "Output",
- CellChangeTimes->{{3.73541367641581*^9, 3.735413691725602*^9}, 
-   3.7855065500737343`*^9},
- CellLabel->"Out[88]=",ExpressionUUID->"5640f511-cb23-423a-b007-4d7274d4ede1"]
-}, Open  ]]
+ CellLabel->"In[88]:=",ExpressionUUID->"5007f3fd-ff47-4809-8bdd-2a01602f442c"]
 },
 WindowSize->{967, 711},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -265,34 +158,13 @@ CellTagsIndex->{}
 Notebook[{
 Cell[558, 20, 875, 21, 83, "Text",ExpressionUUID->"85807fc5-c070-461a-a31d-4d9ec793df64"],
 Cell[1436, 43, 175, 6, 58, "Text",ExpressionUUID->"bfa1b64f-13e6-416c-96b4-5e78c9643d79"],
-Cell[CellGroupData[{
-Cell[1636, 53, 2739, 59, 241, "Input",ExpressionUUID->"4e90f3a6-4fd7-4764-9921-8108b9556a97"],
-Cell[4378, 114, 218, 3, 34, "Output",ExpressionUUID->"32d5ea66-4477-4e6d-9b31-b8805574e993"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[4633, 122, 212, 3, 30, "Input",ExpressionUUID->"8769fbd8-524f-4aa4-bc25-1b3a08046ea0"],
-Cell[4848, 127, 632, 15, 24, "Print",ExpressionUUID->"efb86a5a-d548-4707-a4df-d375b38363b5"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5517, 147, 212, 3, 30, "Input",ExpressionUUID->"8605c221-a253-4928-a0ec-1039f557074c"],
-Cell[5732, 152, 605, 14, 24, "Print",ExpressionUUID->"7e608314-9cbd-42c0-ae0d-aceecc6f9e3e"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[6374, 171, 211, 3, 30, "Input",ExpressionUUID->"251fa27e-4783-48ae-8b05-aedead693072"],
-Cell[6588, 176, 500, 12, 24, "Print",ExpressionUUID->"522d49a9-fd03-422a-8307-a4f685559aad"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[7125, 193, 210, 3, 30, "Input",ExpressionUUID->"2da838f4-aeb5-4e3a-9a82-f3e83ea11e2c"],
-Cell[7338, 198, 500, 12, 24, "Print",ExpressionUUID->"93736b53-660b-43ae-92c3-a8985bb2bf5a"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[7875, 215, 210, 3, 30, "Input",ExpressionUUID->"40eee8e1-d6c7-46fe-80e0-c4e3c6bb8ab8"],
-Cell[8088, 220, 555, 13, 24, "Print",ExpressionUUID->"c040f8cc-6328-4ac4-b77f-671c75dc0836"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[8680, 238, 200, 3, 30, "Input",ExpressionUUID->"5007f3fd-ff47-4809-8bdd-2a01602f442c"],
-Cell[8883, 243, 217, 3, 92, "Output",ExpressionUUID->"5640f511-cb23-423a-b007-4d7274d4ede1"]
-}, Open  ]]
+Cell[1614, 51, 2739, 59, 241, "Input",ExpressionUUID->"4e90f3a6-4fd7-4764-9921-8108b9556a97"],
+Cell[4356, 112, 212, 3, 30, "Input",ExpressionUUID->"8769fbd8-524f-4aa4-bc25-1b3a08046ea0"],
+Cell[4571, 117, 212, 3, 30, "Input",ExpressionUUID->"8605c221-a253-4928-a0ec-1039f557074c"],
+Cell[4786, 122, 211, 3, 30, "Input",ExpressionUUID->"251fa27e-4783-48ae-8b05-aedead693072"],
+Cell[5000, 127, 210, 3, 30, "Input",ExpressionUUID->"2da838f4-aeb5-4e3a-9a82-f3e83ea11e2c"],
+Cell[5213, 132, 210, 3, 30, "Input",ExpressionUUID->"40eee8e1-d6c7-46fe-80e0-c4e3c6bb8ab8"],
+Cell[5426, 137, 200, 3, 30, "Input",ExpressionUUID->"5007f3fd-ff47-4809-8bdd-2a01602f442c"]
 }
 ]
 *)
