@@ -6,6 +6,6 @@ While data structures here are quite elementary and common, still they form a fo
 
 #### To-Do's
  1. Learn and implement Priority Queues using binary heaps.
- 1. Maps (Dicts/Associate-Arrays) and Sets
+ 1. Maps (Dicts/Associative-Arrays) and Sets
  1. Common sort algorithms
  1. Basic graphs algorithms
