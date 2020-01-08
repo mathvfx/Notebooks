@@ -1,4 +1,10 @@
 #!env python
+#
+# Alex Lim. 2020. https://mathvfx.github.io
+# This Python code is intended as my own learning and programming exercises. 
+#
+# REFERENCES and CREDITS: 
+#   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
 
 from abc import ABCMeta, abstractmethod
 
@@ -82,5 +88,3 @@ class Tree(metaclass=ABCMeta):
 # Using Position ABC allows for greater generalization of Tree. For example,
 # We can implement subclass it into general m-ary tree, or binary tree using
 # Linked List or Array. 
-
-# CREDIT: Goodrich, et al. DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013)

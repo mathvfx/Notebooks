@@ -1,4 +1,10 @@
 #!env python
+#
+# Alex Lim. 2020. https://mathvfx.github.io
+# This Python code is intended as my own learning and programming exercises. 
+#
+# REFERENCES and CREDITS: 
+#   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
 
 from abc import abstractmethod
 from .tree import Tree
@@ -36,6 +42,3 @@ class BinaryTree(Tree):
             yield self.left_child(p)
         if self.right_child(p) is not None:
             yield self.right_child(p)
-
-
-# CREDIT: Goodrich, et al. DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013)
