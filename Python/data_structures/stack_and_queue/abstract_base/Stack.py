@@ -6,7 +6,7 @@
 
 from abc import ABCMeta, abstractmethod
 
-class Stack(metaclass=ABCMeta):
+class StackBase(metaclass=ABCMeta):
     '''Implement ADT using last-in, first-out (LIFO) principle.'''
     @abstractmethod
     def __len__(self):

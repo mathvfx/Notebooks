@@ -6,7 +6,7 @@
 
 from abc import ABCMeta, abstractmethod
 
-class Queue(metaclass=ABCMeta):
+class QueueBase(metaclass=ABCMeta):
     @abstractmethod
     def __len__(self):
         ...

@@ -6,7 +6,7 @@
 
 from abc import ABCMeta, abstractmethod
 
-class DEQue(metaclass=ABCMeta):
+class DequeBase(metaclass=ABCMeta):
     '''Double-Ended Queue implementations. 
        For production, use collections.deque instead.
     '''

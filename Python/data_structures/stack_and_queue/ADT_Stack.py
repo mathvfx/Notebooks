@@ -7,14 +7,14 @@
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
 
 
-from abstract_base.Stack import Stack
+from abstract_base.Stack import StackBase
 
 
 class Empty(Exception):
     pass
 
 
-class ArrayStack(Stack):
+class ArrayStack(StackBase):
     '''ArrayStack ADT implemented using python list as underlying storage.'''
     def __init__(self, build_list: list = None):
         if build_list:
@@ -81,7 +81,7 @@ class ArrayStack(Stack):
         return self._data[-1]
 
 
-class LinkedStack(Stack):
+class LinkedStack(StackBase):
     '''LinkedStack ADT implemented using singly linked-list.'''
     class _Node:
         __slots__ = ("_elem", "_next")

@@ -7,19 +7,17 @@
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
 
 
-from abstract_base.Queue import Queue
-
+from abstract_base.Queue import QueueBase
 
 class Empty(Exception):
     pass
-
 
 # Potential issue with using Python list is that Python will generally allocate 
 # more memory than is needed in anticipation of append operations. To optimize 
 # storage usage, we will cycle through empty portion of array until resize is 
 # needed.
 
-class ArrayQueue(Queue):
+class ArrayQueue(QueueBase):
     '''ArrayQueue ADT implemented using python list as underlying storage.'''
     DEFAULT_CAPACITY = 10
 
@@ -124,10 +122,7 @@ class ArrayQueue(Queue):
             walk = (walk + 1)%len(orig_list)
 
 
-# Keeping in mind that every linked node require a little more storage space 
-# than an array.
-
-class LinkedQueue(Queue):
+class LinkedQueue(QueueBase):
     '''LinkedQueue ADT implemented using circular linked-list.'''
     class _Node:
         __slots__ = ("_elem", "_next")
