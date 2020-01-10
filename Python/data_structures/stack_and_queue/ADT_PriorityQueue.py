@@ -41,7 +41,7 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         compared. Smallest priority in PQ is the minimum of the set.
         '''
         super().add(self._Item(priority, elem))
-        self._upheap(len(self) - 1)  # bubble-up for min-hip when adding item
+        self._upheap(len(self) - 1)  # bubble-up for min-heap when adding item
 
     #TODO
     def merge(self, other):
@@ -55,7 +55,7 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         defined as Item with the smallest nonnegative priority number.
         '''
         if self.is_empty():
-            raise Empty("PQ is empty. Cannot peak.")
+            raise Empty("PQ is empty. Cannot peek.")
         return self._data[0]   # type is _Item
 
     def pop(self) -> PQBase._Item:
@@ -64,9 +64,11 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         defined as Item with the smallest nonnegative priority number.
         '''
         if self.is_empty():
-            raise Empty("PQ is empty. Cannot peak.")
+            raise Empty("PQ is empty. Cannot pop.")
+        # Always maintain Complete Binary Tree Property first before fixing
+        # Heap Order Property.
         self.swap(0, len(self)-1)   # move min root to the end node
-        ans = self._data.pop()   # Python's list.pop()
+        ans = self._data.pop()   # using Python's list.pop()
         self._downheap(0)   # Bubble-down for min-heap when removing item
         return ans
 
