@@ -16,7 +16,7 @@ While data structures here are quite elementary and common, still they form a fo
     * Understand the differences between singly, circular, and doubly linked-list.
     * Understand the challenges in terms of their implementations and ease of use.
  1. _Binary Tree (special case of m-ary tree&mdash; which also special case of Graph)_
-    * Understand property of binary tree; how to build and traverse a tree.
+    * Understand property of binary tree; how to build and traverse a tree; relations between BFS and Queue, DFS and Stack.
     * Know the names and types of trees and their mathematical properties.
     * Possible applications may include: binary space partitioning, k-d tree, nearest-neighbor issue, heap and priority queue, etc.
  1. _Priority Queue_
