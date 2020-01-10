@@ -21,7 +21,7 @@ While data structures here are quite elementary and common, still they form a fo
     * Possible applications may include: binary space partitioning, k-d tree, nearest-neighbor issue, heap and priority queue, etc.
  1. _Priority Queue_
     * Understand multiple inheritance by using previously implemented ADTs in OOP fashion.
-    * Understand issues pertaining to method resolution order (MRO)in terms of how Python determine which method to use.
+    * Understand issues pertaining to method resolution order (MRO)in terms of how Python determine which method to use in its inheritance tree.
     * Understand binary heaps, and how we can exploit properties of binary heaps to better utilize resources (array instead of linked-list in this case)
 
 
