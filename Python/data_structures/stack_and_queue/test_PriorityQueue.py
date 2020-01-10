@@ -7,10 +7,7 @@ def test_HeapPQ():
     print("\n=================== Testing Priority Queue ===================\n")
     letters = "ABCDEFGHIJKLMNPQRSTUVWXYZ"
     L = [(randrange(10, 99), choice(letters)) for _ in range(10)]
-    PQ = PriorityQueue()
-    print(f"PQ empty? {PQ.is_empty()}")
-    for x in L:
-        PQ.add(*x)
+    PQ = PriorityQueue(L)
     print(f"PQ still empty? {PQ.is_empty()}")
     print(f"PQ Height: {PQ.height()}")
     print(f"PQ Length: {len(PQ)}")

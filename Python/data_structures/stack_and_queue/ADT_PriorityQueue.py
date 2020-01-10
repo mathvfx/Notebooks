@@ -20,6 +20,11 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
     Min-heap order and complete binary heap properties are preserved. Output
     of Priority Queue will be in sorted order by priority value.
     '''
+    def __init__(self, item_list: tuple = None):
+        super().__init__()
+        if item_list:
+            self._heapify(item_list)
+
     def __contains__(self, elem):
         # Override PQBase ABC
         '''Return True if element is contained in this PQ.'''
@@ -103,3 +108,15 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
             if self._data[min_child] < self._data[idx]:
                 self.swap(idx, min_child)
                 self._downheap(min_child)
+
+    def _heapify(self, kv_list):
+        '''Bottom-up approach to building binary heap from a given list of
+        key-value pairs. O(n) operations, compared to otherwise O(n log n) time
+        building from top-down.
+        '''
+        if self.is_empty():
+            self._data = [self._Item(k, v) for k,v in kv_list]
+            if len(self) > 1:
+                start = self.parent(len(self) - 1)   # begin from last node
+                for idx in range(start, -1, -1):
+                    self._downheap(idx)
