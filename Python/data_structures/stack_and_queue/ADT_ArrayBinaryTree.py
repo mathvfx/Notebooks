@@ -6,7 +6,7 @@
 # REFERENCES and CREDITS: 
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
 
-from math import ceil, log
+from math import floor, log
 
 class ArrayBinaryTree:
     '''ArrayBinaryTree ADT is an array-based representation of a binary tree
@@ -60,9 +60,12 @@ class ArrayBinaryTree:
         assert idx >= 0
         return self.right_child(idx) < len(self)
     
-    def height(self) -> int:
-        '''Return the height of this level-order binary tree.'''
-        return ceil(log(len(self))/log(2))
+    def height(self, n: int = -1) -> int:
+        '''Return the height of index n of this level-order binary tree.
+        By default, height() return the height of this entire tree.
+        '''
+        n = len(self) if n < 0 else n
+        return floor(log(n+1)/log(2))
 
     def swap(self, i: int, j: int):
         assert i >= 0 and j >= 0

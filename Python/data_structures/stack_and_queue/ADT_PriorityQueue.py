@@ -15,20 +15,15 @@ class Empty(Exception):
 
 
 # Don't forget about MRO issue for multiple inheritance
-class HeapPQ(ArrayBinaryTree, PQBase):
+class PriorityQueue(ArrayBinaryTree, PQBase):
     '''An array-based binary (min) heap implementation of Priority Queue ADT.
-    Min-heap order and complete binary heap properties are preserved.  
-
-    NOTE: Priority value for each Item in HeapPQ is unique.
+    Min-heap order and complete binary heap properties are preserved. Output
+    of Priority Queue will be in sorted order by priority value.
     '''
-    #TODO: build heap from list
-    def __init__(self, build_list: list = None):
-        super().__init__()
-    
-    #TODO
     def __contains__(self, elem):
         # Override PQBase ABC
-        pass
+        '''Return True if element is contained in this PQ.'''
+        return any(x for x in self._data if elem == x.element())
 
     def __len__(self):
         # Override PQBase ABC
@@ -39,20 +34,25 @@ class HeapPQ(ArrayBinaryTree, PQBase):
         # Override PQBase ABC
         pass
 
-    def add(self, key, elem):
+    def add(self, priority, elem):
         # Override PQBase ABC
-        super().add(self._Item(key, elem))
+        '''Push an element with its priority as Item into priority queue.
+        "priority" element may be numerical value or objects that can be 
+        compared. Smallest priority in PQ is the minimum of the set.
+        '''
+        super().add(self._Item(priority, elem))
         self._upheap(len(self) - 1)  # bubble-up for min-hip when adding item
 
     #TODO
     def merge(self, other):
         # Override PQBase ABC
+        '''Merging other PQ into current PQ.'''
         pass
 
     def peek(self) -> PQBase._Item:
         # Override PQBase ABC
         '''Return (but not remove) top-priority Item from PQ. "Top-priority" is
-        is defined as Item with the smallest nonnegative priority number.
+        defined as Item with the smallest nonnegative priority number.
         '''
         if self.is_empty():
             raise Empty("PQ is empty. Cannot peak.")
@@ -61,7 +61,7 @@ class HeapPQ(ArrayBinaryTree, PQBase):
     def pop(self) -> PQBase._Item:
         # Override PQBase ABC
         '''Remove and return top-priority Item from PQ. "Top-priority" is
-        is defined as Item with the smallest nonnegative priority number.
+        defined as Item with the smallest nonnegative priority number.
         '''
         if self.is_empty():
             raise Empty("PQ is empty. Cannot peak.")
@@ -86,6 +86,11 @@ class HeapPQ(ArrayBinaryTree, PQBase):
         '''Bubble a node down the binary heap until Min Heap Order Property is
         satisfied.'''
         assert idx >= 0
+        # Check first if last index is left-child within data length.
+        # If it is, we still need to check for right-child in at index and 
+        # compare smaller value in order to confirm smallest children. Finally,
+        # we compare smallest child value to its parent and bubble down via
+        # swap if smaller.
         if self.has_left_child(idx): 
             left = self.left_child(idx)
             min_child = left
@@ -96,34 +101,3 @@ class HeapPQ(ArrayBinaryTree, PQBase):
             if self._data[min_child] < self._data[idx]:
                 self.swap(idx, min_child)
                 self._downheap(min_child)
-
-if __name__ == "__main__":
-    pq = HeapPQ()
-    print(len(pq))
-    print(pq.is_empty())
-    pq.add(6, "Z")
-    pq.add(12, "H")
-    pq.add(16, "X")
-    pq.add(5, "A")
-    pq.add(7, "Q")
-    pq.add(15, "K")
-    pq.add(9, "F")
-    pq.add(4, "C")
-    pq.add(20, "B")
-    pq.add(14, "E")
-    pq.add(8, "W")
-    pq.add(25, "J")
-    pq.add(11, "S")
-    print(pq.is_empty())
-    item = pq.peek()
-    print(type(item))
-    print(item.priority())
-    print(item.element())
-    print(item)
-    print(pq)
-    print(f"height of this binary heap: {pq.height()}")
-    print(pq.pop())
-    print(pq.pop())
-    item = pq.pop()
-    print(type(item), item)
-    print(pq)
