@@ -1,5 +1,5 @@
 # Notebook
-This notebook serves as my public repository of various learning notes and exercises spanning Mathematics, programming, Houdini tools, and others. I make effort toward producing quality and accurate notes and, therefore, my content output may be slow. But contents here will be updated and added over time. 
+This notebook serves as my public repository of various learning notes and exercises spanning Mathematics, programming, Houdini tools, and others. I make effort toward producing quality and accurate notes and, therefore, my content output may be slow. But contents here will be updated and accumulated over time. 
 
 
 ### Data Structures
@@ -20,6 +20,9 @@ While data structures here are quite elementary and common, still they form a fo
     * Know the names and types of trees and their mathematical properties.
     * Possible applications may include: binary space partitioning, k-d tree, nearest-neighbor issue, heap and priority queue, etc.
  1. _Priority Queue_
+    * Understand multiple inheritance by using previously implemented ADTs in OOP fashion.
+    * Understand issues pertaining to method resolution order (MRO)in terms of how Python determine which method to use in its inheritance tree.
+    * Understand binary heaps, and how we can exploit properties of binary heaps to better utilize resources (array instead of linked-list in this case)
 
 
 ### To-Do's
