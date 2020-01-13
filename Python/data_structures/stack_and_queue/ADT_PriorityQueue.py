@@ -42,11 +42,6 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         # Override PQBase ABC
         return super().__len__()
 
-    #TODO
-    def __next__(self):
-        # Override PQBase ABC
-        pass
-
     def add(self, priority, elem):
         # Override PQBase ABC
         '''Push an element with its priority as Item into priority queue.

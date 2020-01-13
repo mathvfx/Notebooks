@@ -31,10 +31,10 @@ class PQBase(metaclass=ABCMeta):
             return self._key < other._key
 
         def __str__(self):
-            return f"({self._key}, {self._elem})"
+            return str((self._key, self._elem))
 
         def __repr__(self):
-            return f"({self._key},{self._elem})"
+            return repr((self._key, self._elem))
 
         def element(self):
             return self._elem
@@ -49,10 +49,6 @@ class PQBase(metaclass=ABCMeta):
 
     @abstractmethod
     def __len__(self):
-        ...
-
-    @abstractmethod
-    def __next__(self):
         ...
 
     @abstractmethod
