@@ -14,18 +14,24 @@ class Empty(Exception):
     pass
 
 
-# Don't forget about MRO issue for multiple inheritance
 class PriorityQueue(ArrayBinaryTree, PQBase):
     '''An array-based binary (min) heap implementation of Priority Queue ADT.
     Min-heap order and complete binary heap properties are preserved. Output
     of Priority Queue will be in sorted order by priority value.
+
+    For production, consider instead Python's 'heapq' module. 'heapq' doesn't
+    provide PriorityQueue class. Instead, it provides functions that allow a
+    standard Python list to be managed as heap. 'heapq' doesn't separately
+    manage associated values. Elements serve as their own key.
     '''
     def __init__(self, kv_list: tuple = None):
         '''Constructor. To initialize, provide kv_list, where kv_list is a list 
-        of tuple(priority, element).'''
+        of tuple(priority, element).
+        '''
         super().__init__()
         if kv_list:
-            self._heapify(kv_list)
+            self._data = [self._Item(k, v) for k,v in kv_list]
+            self._heapify()
 
     def __contains__(self, elem):
         # Override PQBase ABC
@@ -45,16 +51,18 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         # Override PQBase ABC
         '''Push an element with its priority as Item into priority queue.
         "priority" element may be numerical value or objects that can be 
-        compared. Smallest priority in PQ is the minimum of the set.
+        compared. Smallest priority in PQ is defined as the minimum of the set.
         '''
         super().add(self._Item(priority, elem))
-        self._upheap(len(self) - 1)  # bubble-up for min-heap when adding item
+        self._upheap(len(self) - 1)  # bubble-up when adding item
 
-    #TODO
-    def merge(self, other):
+    def merge(self, other: PQBase):
         # Override PQBase ABC
         '''Merging other PQ into current PQ.'''
-        pass
+        if not isinstance(other, type(self)):
+            raise TypeError("'other' must be of type PriorityQueue")
+        self._data += other._data
+        self._heapify()
 
     def peek(self) -> PQBase._Item:
         # Override PQBase ABC
@@ -76,7 +84,7 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         # Heap Order Property.
         self.swap(0, len(self)-1)   # move min root to the end node
         ans = self._data.pop()   # using Python's list.pop()
-        self._downheap(0)   # Bubble-down for min-heap when removing item
+        self._downheap(0)   # Bubble-down when removing item
         return ans
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,7 +92,8 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
 
     def _upheap(self, idx: int):
         '''Bubble a node up the binary heap until Min Heap Order Property is
-        satisfied.'''
+        satisfied.
+        '''
         assert idx >= 0
         parent = self.parent(idx)
         if idx > 0 and self._data[idx] < self._data[parent]:
@@ -93,7 +102,8 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
 
     def _downheap(self, idx: int):
         '''Bubble a node down the binary heap until Min Heap Order Property is
-        satisfied.'''
+        satisfied.
+        '''
         assert idx >= 0
         # Check first if last index is left-child within data length.
         # If it is, we still need to check for right-child in at index and 
@@ -111,14 +121,16 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
                 self.swap(idx, min_child)
                 self._downheap(min_child)
 
-    def _heapify(self, kv_list):
+    def _heapify(self):
         '''Bottom-up approach to building binary heap from a given list of
         key-value pairs. O(n) operations, compared to otherwise O(n log n) time
         building from top-down.
         '''
-        if self.is_empty():
-            self._data = [self._Item(k, v) for k,v in kv_list]
-            if len(self) > 1:
-                start = self.parent(len(self) - 1)   # begin from last node
-                for idx in range(start, -1, -1):
-                    self._downheap(idx)
+        # If we initialized our list ahead, we can construct bottom-up heap
+        # with a single loop calling _downheap, starting with deepest level and
+        # ending at root. The loop can start with deepest nonleaf, since 
+        # there's no effect when _downheap is called at leaf.
+        if len(self) > 1:
+            start = self.parent(len(self) - 1)   # begin from last node
+            for idx in range(start, -1, -1):
+                self._downheap(idx)

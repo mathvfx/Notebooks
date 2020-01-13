@@ -31,6 +31,14 @@ def test_HeapPQ():
     print(f"type(item) = {type(item)}")
     print(f"item.priority() = {item.priority()}")
     print(f"item.element() = {item.element()}")
+    L2 = [(randrange(10, 99), choice(letters)) for _ in range(7)]
+    other = PriorityQueue(L2)
+    print(f"OTHER PQ: {other}")
+    print(".... Now attempting to merge 'other' with PQ...")
+    PQ.merge(other)
+    print(f"PQ merged 'OTHER': {PQ}\n")
+    print(f"PQ Height: {PQ.height()}")
+    print(f"PQ Length: {len(PQ)}")
 
 
 if __name__ == "__main__":
