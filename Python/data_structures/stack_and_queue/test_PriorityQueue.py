@@ -34,10 +34,16 @@ def test_HeapPQ():
     L2 = [(randrange(10, 99), choice(letters)) for _ in range(7)]
     other = PriorityQueue(L2)
     print(f"OTHER PQ: {other}")
-    print(".... Now attempting to merge 'other' with PQ...")
+    print("\n.... Now attempting to merge 'other' with PQ...")
     PQ.merge(other)
     print(f"PQ merged 'OTHER': {PQ}\n")
     print(f"PQ Height: {PQ.height()}")
+    print(f"PQ Length: {len(PQ)}")
+    print("\n....Now we will pop all items off of PQ... \n")
+    for _ in range(len(PQ)):
+        print(PQ.pop())
+    #for x in PQ:
+    #    print(x)
     print(f"PQ Length: {len(PQ)}")
 
 

@@ -24,11 +24,15 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
     standard Python list to be managed as heap. 'heapq' doesn't separately
     manage associated values. Elements serve as their own key.
     '''
-    def __init__(self, kv_list: tuple = None):
+    def __init__(self, kv_list: tuple = None, use_max_heap: bool = False):
         '''Constructor. To initialize, provide kv_list, where kv_list is a list 
-        of tuple(priority, element).
+        of tuple(priority, element). 
+
+        By default, we use min-heap order property. Set use_max_heap = True
+        to use max-heap order property.
         '''
         super().__init__()
+        self._cmp = "__gt__" if use_max_heap else "__lt__"
         if kv_list:
             self._data = [self._Item(k, v) for k,v in kv_list]
             self._heapify()
@@ -37,6 +41,9 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         # Override PQBase ABC
         '''Return True if element is contained in this PQ.'''
         return any(x for x in self._data if elem == x.element())
+
+    def __iter__(self):
+        return iter(self._data)
 
     def __len__(self):
         # Override PQBase ABC
@@ -56,7 +63,7 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         '''Merging other PQ into current PQ.'''
         if not isinstance(other, type(self)):
             raise TypeError("'other' must be of type PriorityQueue")
-        self._data += other._data
+        self._data += other._data   # using Python's List __iadd__
         self._heapify()
 
     def peek(self) -> PQBase._Item:
@@ -91,7 +98,8 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         '''
         assert idx >= 0
         parent = self.parent(idx)
-        if idx > 0 and self._data[idx] < self._data[parent]:
+        # self._cmp is '<' if min-heap; otherwise, it is '>' for max-heap.
+        if idx > 0 and getattr(self._data[idx], self._cmp)(self._data[parent]):
             self.swap(idx, parent)
             self._upheap(parent)
 
@@ -110,9 +118,10 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
             min_child = left
             if self.has_right_child(idx):
                 right = self.right_child(idx)
-                if self._data[right] < self._data[left]:
+                # self._cmp is '<' if min-heap; otherwise, '>' for max-heap.
+                if getattr(self._data[right], self._cmp)(self._data[left]):
                     min_child = right
-            if self._data[min_child] < self._data[idx]:
+            if getattr(self._data[min_child], self._cmp)(self._data[idx]):
                 self.swap(idx, min_child)
                 self._downheap(min_child)
 
