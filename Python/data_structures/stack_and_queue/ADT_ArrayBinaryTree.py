@@ -1,4 +1,4 @@
-#!env python
+#!env python3
 #
 # Alex Lim. 2020. https://mathvfx.github.io
 # This Python code is intended as my own learning and programming exercises. 
@@ -13,8 +13,11 @@ class ArrayBinaryTree:
     implemented using Python List as its underlying data storage. This is a 
     breadth-first (level) order binary tree and elements are unsorted.
     '''
-    def __init__(self):
-        self._data = list()
+    def __init__(self, build_list: list = None):
+        self._data = build_list.copy() if build_list else list()
+
+    def __getitem__(self, key):
+        return self._data[key]
 
     def __len__(self):
         return len(self._data)
@@ -31,6 +34,9 @@ class ArrayBinaryTree:
         '''
         assert idx >= 0
         return (idx - 1)//2
+
+    def pop(self):
+        return self._data.pop()  # using Python's List pop().
 
     def left_child(self, idx: int) -> int:
         '''Bijective map between array index and binary tree left child node.
