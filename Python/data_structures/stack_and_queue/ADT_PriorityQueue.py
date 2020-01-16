@@ -63,7 +63,7 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         # Override PQBase ABC
         '''Merging other PQ into current PQ.'''
         if not isinstance(other, type(self)):
-            raise TypeError("'other' must be of type PriorityQueue")
+            raise TypeError(f"{repr(other)} must be of type PriorityQueue")
         self._data += other._data   # using Python's List __iadd__
         self._heapify()
 
