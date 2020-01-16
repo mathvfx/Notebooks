@@ -1,4 +1,4 @@
-#!env python
+#!env python3
 #
 # Alex Lim. 2020. https://mathvfx.github.io
 # This Python code is intended as my own learning and programming exercises. 
@@ -43,7 +43,8 @@ class PriorityQueue(ArrayBinaryTree, PQBase):
         return any(x for x in self._data if elem == x.element())
 
     def __iter__(self):
-        return iter(self._data)
+        for item in self._data:
+            yield item._key
 
     def __len__(self):
         # Override PQBase ABC
