@@ -9,14 +9,8 @@
 #      Wikipedia, The Free Encyclopedia, 12 Jan. 2020. Web. 20 Jan. 2020.
 # 3. Wikipedia contributors. "Salt (cryptography)." Wikipedia, The Free Encyclopedia. 
 #      Wikipedia, The Free Encyclopedia, 8 Jan. 2020. Web. 20 Jan. 2020.
-
-
-from abc import abstractmethod
-from random import randrange
-
-from Maps import MapBase
-
-
+#
+#
 # Note that much of the implementations here have been following Goodrich et al
 # as my basis and learning. The much more interesting aspect of this particular
 # topic has been regarding hash function and its behavior. 
@@ -24,6 +18,12 @@ from Maps import MapBase
 # Compared to ListMaps ADT, the key concept here is that we attempt to exploit 
 # the speed of random access of List/array as our underlying storage system 
 # by hashing any objects into suitable array/List indices.
+
+
+from abc import abstractmethod
+from random import randrange
+
+from Maps import MapBase
 
 
 class HashMapBase(MapBase):
@@ -72,14 +72,22 @@ class HashMapBase(MapBase):
         '''
         idx = self._hash_map(key)
         self._bucket_setitem(idx, key, value)
-        self._n += 1
+        # We wish to keep load factor at certain threshold and resize to some
+        # prime number capacity in order to minimize hash collision. 
+        #
+        # _next_prime() is an O(n^2) operation and there may be potential issue
+        # with large prime gap when n is significantly large, but for academic
+        # purposes here, we'll gloss over this issue.
+        #
+        # 2n is an even number and will never be prime except when n = 1.
+        if self._n > len(self._data)//2:  
+            self._resize(self._next_prime(2*len(self._data)-1))
 
     def __delitem__(self, key):
         # Override MapBase (MutableMapping) ABC
         '''Delete Item by 'key'. Raise KeyError if 'key' is not exist.'''
         idx = self._hash_map(key)
         self._bucket_delitem(idx, key)
-        self._n -= 1
     
     @abstractmethod
     def __iter__(self): 
@@ -101,3 +109,32 @@ class HashMapBase(MapBase):
     @abstractmethod
     def _bucket_delitem(self, hash_idx, key):
         ...
+
+    def _resize(self, capacity):
+        # We desire 'capacity' to be a prime number to minimize hash collision
+        saved = list(self.items())   # items() is from Mapping ABC
+        self._data = [None]*capacity
+        self._n = 0
+        for k,v in saved:  # restore to new storage space
+            self[k] = v
+
+    @staticmethod
+    def _next_prime(n):
+        '''Find the next prime integer from n. O(n^2) time operation.'''
+        assert n >= 0
+        def _is_prime(n):
+            if n < 2:
+                return False
+            if n == 2:  # the only even prime
+                return True
+            for i in range(3, int(n**0.5)+1, 2):
+                if n % i == 0:
+                    return False
+            return True
+        while True:
+            if n & 1 == 0: # n is even integer, skip.
+                n += 1
+                continue
+            if _is_prime(n):
+                return n
+            n += 1
