@@ -23,9 +23,14 @@ While data structures here are quite elementary and common, still they form a fo
     * Understand multiple inheritance by using previously implemented ADTs in OOP fashion.
     * Understand issues pertaining to method resolution order (MRO)in terms of how Python determine which method to use in its inheritance tree.
     * Understand binary heaps, and how we can exploit properties of binary heaps to better utilize resources (array instead of linked-list in this case)
+ 1. _Maps_
+    * Using similar methods of Priority Queue, we attempt to implement an unsorted-list maps using "key" as our access indices. But using such list maps are largely a O(n)-time operation.
+    * Understant concepts of Python's Dictionary (a.k.a. associative array) and hashing functions. 
+    * Understand the concept of hashing function as an intermediary to generate proper array indices in order for regular list/array access.
+    * Understand the broader issue associated with hash collision, and basic collision resolution methods, and the reasons behind such collisions, and broader consequences in security.
 
 
 ### To-Do's
- 1. Maps (Dicts/Associative-Arrays) and Sets
+ 1. Sets
  1. Common sort algorithms
  1. Basic graphs algorithms
