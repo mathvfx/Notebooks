@@ -23,7 +23,7 @@
 from abc import abstractmethod
 from random import randrange
 
-from Maps import MapBase
+from .Maps import MapBase
 
 
 class HashMapBase(MapBase):
@@ -80,7 +80,10 @@ class HashMapBase(MapBase):
         # purposes here, we'll gloss over this issue.
         #
         # 2n is an even number and will never be prime except when n = 1.
-        if self._n > len(self._data)//2:  
+        #
+        # Load factors will have statistical effects on hash collision
+        # frequencies at the expense of storage. Control this accordingly.
+        if self._n > len(self._data)//2:  # Load Factor of ~0.5
             self._resize(self._next_prime(2*len(self._data)-1))
 
     def __delitem__(self, key):
@@ -89,14 +92,20 @@ class HashMapBase(MapBase):
         idx = self._hash_map(key)
         self._bucket_delitem(idx, key)
     
+    def __len__(self):
+        # Override MapBase (MutableMapping) ABC
+        return self._n
+
+    def __repr__(self):
+        return repr([x for x in self.items()])
+
+    def __str__(self):
+        return str({x:y for x,y in self.items()})
+
     @abstractmethod
     def __iter__(self): 
         # From MapBase (MutableMapping) ABC
         ...
-
-    def __len__(self):
-        # Override MapBase (MutableMapping) ABC
-        return self._n
 
     @abstractmethod
     def _bucket_getitem(self, hash_idx, key):
@@ -138,3 +147,20 @@ class HashMapBase(MapBase):
             if _is_prime(n):
                 return n
             n += 1
+
+    def DEBUG_DATASET(self):
+        '''Debug view of the entire allocated memory capacity. Good for
+        checking behaviors of hash collision.
+        '''
+        print("~~~~~~~~~~~~~~~~~~~  DEBUG ENTIRE DATASET  ~~~~~~~~~~~~~~~~~~~")
+        collision_count = 0
+        line = 0
+        for bucket in self._data:
+            if bucket:
+                collision_count += 1 if len(bucket) > 1 else 0
+                print(f"Bucket {line} [{len(bucket)}]:  {bucket}")
+            line += 1
+        print(f"Total collision buckets: {collision_count}")
+        print(f" Total storage capacity: {len(self._data)}")
+        print(f"            Load Factor: {self._n/len(self._data)}")
+        print("~~~~~~~~~~~~~~~~~  END DEBUG ENTIRE DATASET  ~~~~~~~~~~~~~~~~~")

@@ -53,7 +53,7 @@ class ChainHashMap(HashMapBase):
         # handling hash collision, and thereby creating an overall hash table.
         if self._data[hash_idx] is None:
             self._data[hash_idx] = UnsortedMap()  # also can be LinkedList, etc
-        old_size = len(self._data[hash_dx])
+        old_size = len(self._data[hash_idx])
         self._data[hash_idx][key] = value   # O(k) time. 
         if len(self._data[hash_idx]) > old_size:
             self._n += 1
@@ -68,12 +68,12 @@ class ChainHashMap(HashMapBase):
 
 
 #TODO
-class LinearHashMap(HashMapBase):
-    '''A Hash Map with Linear Probing method for collision resolution.'''
-    pass
+#class LinearHashMap(HashMapBase):
+#    '''A Hash Map with Linear Probing method for collision resolution.'''
+#    pass
 
 
 #TODO
-class ReHashMap(HashMapBase):
-    '''A Hash Map with Rehash method for collision resolution.'''
-    pass
+#class ReHashMap(HashMapBase):
+#    '''A Hash Map with Rehash method for collision resolution.'''
+#    pass
