@@ -8,7 +8,6 @@
 
 
 import bisect
-
 from abstract_base.Maps import MapBase
 
 
@@ -63,6 +62,16 @@ class SortedMap(MapBase):
     def __str__(self):
         return str({x:y for x,y in self.items()})
 
+    def find_range(self, start_key, stop_key):
+        '''Find a range of key-value pairs in this ordered set where keys fit
+        within right-open interval [start_key, stop_key).
+        '''
+        idx = bisect.bisect_left(self._data, self._Item(start_key, None))
+        while idx < len(self) and \
+                (self._data[idx]._key < stop_key or stop_key is None):
+           yield self._data[idx] 
+           idx += 1
+
 
 # Much of our implementation here mirrors that of PriorityQueue ADT.
 # Given that much of our functions are O(n) time, we will want to consider
@@ -116,8 +125,12 @@ class UnsortedMap(MapBase):
         # Override MapBase (MutableMapping) ABC
         return len(self._data) 
 
-    def __str__(self):
-        return str({x:y for x,y in self.items()})
-
     def __repr__(self):
         return repr([x for x in self.items()])
+
+    def __reversed__(self):
+        for item in reversed(self._data):
+            yield item._key
+
+    def __str__(self):
+        return str({x:y for x,y in self.items()})
