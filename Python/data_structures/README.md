@@ -10,7 +10,7 @@ While data structures here are quite elementary and common, still they form a fo
  1. **_Stack and Queue and Deque_**
     * Understand an object-oriented design method called Abstract Base Class (ABC); how ABC can guarantee that such object will have certain method available in a larger software context; also useful as a "checklist" of what needs to be implemented in an Abstract Data Type (ADT).
     * Understand design and encapsulation differences between Stack, Queue, and Double-Ended Queue.
-    * Possible applications of Queue could be to build and traverse level-order binary tree; using Deque to implement round-robin games and model ticket booth, etc.
+    * Possible applications of Queue could be to build and traverse level-order binary tree; using Deque to implement _round-robin games_ and _modeling ticket booth_, etc.
 
  1. **_Linked-List_**
     * Understand differences between array and linked-list; pros and cons in terms of memory usage and random access time.
@@ -33,7 +33,7 @@ While data structures here are quite elementary and common, still they form a fo
     * Understant concepts of Python's Dictionary (a.k.a. associative array) and hashing functions. 
     * Understand the concept of hashing function as an intermediary to generate proper array indices in order for regular list/array access.
     * Understand the broader issue associated with hash collision, and basic collision resolution methods, and the reasons behind such collisions, and broader consequences in security.
-    * Understand the implementation of Set (_Set Theory_ definition) is really just a special case implementation of Maps (without _Item_ object storage).
+    * Understand the implementation of Set (_Set Theory_ definition) is really just a special case implementation of Maps (without _Item_ object storage). Note that _key_ in a traditional Map must be unique, thus we can exploit this feature for Set.
     * Aware that Multimaps and Multisets are also special case implementation of Maps and Sets.
       * Multiset: keys are now allowed to be duplicates using container.
       * Multimap: Same keys can now be mapped to multiple values.
