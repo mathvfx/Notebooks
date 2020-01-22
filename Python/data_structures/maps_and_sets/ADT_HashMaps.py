@@ -21,7 +21,7 @@
 
 
 from abstract_base.HashMaps import HashMapBase
-from ADT_UnsortedListMaps import UnsortedMap
+from ADT_ListMaps import UnsortedMap, SortedMap
 
 
 class ChainHashMap(HashMapBase):
@@ -52,7 +52,7 @@ class ChainHashMap(HashMapBase):
         # "Hash Table": each array indices contain another array entry for 
         # handling hash collision, and thereby creating an overall hash table.
         if self._data[hash_idx] is None:
-            self._data[hash_idx] = UnsortedMap()  # also can be LinkedList, etc
+            self._data[hash_idx] = SortedMap()  # also can be LinkedList, etc
         old_size = len(self._data[hash_idx])
         self._data[hash_idx][key] = value   # O(k) time. 
         if len(self._data[hash_idx]) > old_size:
