@@ -62,11 +62,14 @@ class SortedMap(MapBase):
     def __str__(self):
         return str({x:y for x,y in self.items()})
 
-    def find_range(self, start_key, stop_key):
+    def find_range(self, start_key, stop_key = None):
         '''Find a range of key-value pairs in this ordered set where keys fit
-        within right-open interval [start_key, stop_key).
+        within right-open interval [start_key, stop_key). If start_key and 
+        stop_key are None, entire key-value pairs will be traversed.
         '''
-        idx = bisect.bisect_left(self._data, self._Item(start_key, None))
+        idx = 0
+        if start_key is not None or not isinstance(start_key, object):
+            idx = bisect.bisect_left(self._data, self._Item(start_key, None))
         while idx < len(self) and \
                 (self._data[idx]._key < stop_key or stop_key is None):
            yield self._data[idx] 
