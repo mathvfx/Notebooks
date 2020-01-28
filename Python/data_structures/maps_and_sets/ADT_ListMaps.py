@@ -5,6 +5,12 @@
 #
 # REFERENCES and CREDITS: 
 #   Goodrich et al, DATA STRUCTURES AND ALGORITHMS IN PYTHON (2013), Wiley
+#
+#
+# List Maps here does not use hashing functions to determine list indices.
+# Instead, we simply use a list to store Key-Value Item into each list
+# components. Sorted List Maps use Binary Search method to determine insertion 
+# point for each Key-Value Items, and thereby creating a sorted list of Items. 
 
 
 import bisect
