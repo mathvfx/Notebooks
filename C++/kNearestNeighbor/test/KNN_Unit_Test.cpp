@@ -1,3 +1,4 @@
+#include <chrono>
 #include <cmath>
 #include <iostream>
 #include <iomanip>
@@ -361,6 +362,7 @@ namespace Test_BoundedVector {
 namespace Test_NearestNeighbor {
     struct Fixture_KNN : ::testing::Test {
         KNN::WavefrontObject wavefront_obj {R"(./data/grid_ptcld_10.obj)"};
+//        std::chrono::milliseconds timer;
     };
     TEST_F(Fixture_KNN, Single_NN_Search) {
         KNN::NearestNeighbor knn_search {wavefront_obj};
@@ -380,27 +382,59 @@ namespace Test_NearestNeighbor {
         knn_search.search(my_output_pod, {0.3, 0, 1.7});
         EXPECT_EQ(9, my_output_pod.ptnum);
     }
-    TEST_F(Fixture_KNN, K_NN_Search) {
-        KNN::NearestNeighbor knn_search {wavefront_obj};
+    TEST_F(Fixture_KNN, k_NN_Search_On_10_Points) {
+        KNN::NearestNeighbor knn_bst {wavefront_obj};
         std::vector<KNN::CBT_POD> output;
         constexpr size_t k_value = 20; // will be clamped to max data size
         
-        knn_search.ksearch(output, {0, 0, 0}, k_value);
+        knn_bst.ksearch(output, {0, 0, 0}, k_value);
         
         constexpr size_t expected_ordered_values[] = {7,4,9,6,3};
         for (size_t i {}; i < 5; ++i)
             EXPECT_EQ(expected_ordered_values[i], output[i].ptnum);
     }
-    TEST(TEST_KNN, VERIFICATION) {
-        cout << "       Loading Wavefront OBJ file......." << std::flush;
-        KNN::WavefrontObject wavefront {R"(./data/grid_ptcld_10.obj)"};
-        cout << "Done!\n";
-        KNN::NearestNeighbor knn_search {wavefront};
-        cout << "       KD-TREE has height: " << knn_search.height(wavefront.get_point_count()) << endl;
-        std::vector<KNN::CBT_POD> output;
-        knn_search.ksearch(output, {0, 0, 0}, 8);
-        for (size_t i {}; i < 8; ++i)
-            cout << "   POINT NUMBER: " << output[i].ptnum << endl;
-    }
+    TEST_F(Fixture_KNN, k_NN_Search_On_100k_Points) {
+        cout << "\n";
+        cout << "\t\t\tLoading 100,000 data points...";
+        auto timer_start = std::chrono::high_resolution_clock::now();
+        KNN::WavefrontObject wavefront {R"(./data/grid_ptcld_100000.obj)"};
+        auto timer_end = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>
+                        (timer_end - timer_start);
+        cout << " Done!  (Elapsed " << elapsed.count() << " ms)\n";
 
+
+        cout << "\t\t\tBuilding KD-Tree...";
+        timer_start = std::chrono::high_resolution_clock::now();
+        KNN::NearestNeighbor knn_bst {wavefront};
+        timer_end = std::chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::milliseconds>
+                        (timer_end - timer_start);
+        cout << " Done!  (Elapsed " << elapsed.count() << " ms)\n";
+
+
+        cout << "\t\t\tKD-Tree height is "
+             << knn_bst.height(knn_bst.size()) << endl;
+        
+        
+        constexpr size_t k_value = 7;
+        cout << "\t\t\tBegin searching for " << k_value << " nearest points.\n";
+        std::vector<KNN::CBT_POD> output;
+        timer_start = std::chrono::high_resolution_clock::now();
+        knn_bst.ksearch(output, {0, 0, 0}, k_value);
+        timer_end = std::chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::milliseconds>
+                        (timer_end - timer_start);
+
+
+        constexpr size_t known_points[] =
+                        {46276, 49048, 14294, 30254, 75774, 46991, 33633};
+        for (size_t i {}; i < k_value; ++i) {
+            cout << "\t\t\t\t [" << output[i].ptnum << "]  @  "
+                 << *output[i].ptcoord << "\n";
+            EXPECT_EQ(known_points[i], output[i].ptnum);
+        }
+        cout << "\t\t\t\tSearch time elapsed " << elapsed.count() << " ms\n";
+        cout << "\n";
+    }
 } // END namespace Test_NearestNeighbor

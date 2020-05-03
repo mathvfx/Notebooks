@@ -25,6 +25,11 @@ using PRECISION = double;
 constexpr static size_t DIMENSION = 3;
 
 
+// Program Header
+void ProgramHeader();
+
+
+
 // Verify file path string is a valid filesystem path.
 // RETURN: empty path if invalid file path.
 std::filesystem::path VerifyMyFilePath(const std::string& my_path);

@@ -9,6 +9,15 @@
 #include "Globals.hpp"
 
 
+ void KNN::ProgramHeader() {
+    std::cout <<
+    "\n"
+    "\tk-Nearest Neighbor Search\n"
+    "\t< Alex Lim  https://mathvfx.github.io  v2020.05.02 >\n"
+        << std::endl;
+}
+
+
 std::filesystem::path KNN::VerifyMyFilePath(const std::string& my_path) {
     namespace FS = std::filesystem;
     FS::path file_path {my_path};

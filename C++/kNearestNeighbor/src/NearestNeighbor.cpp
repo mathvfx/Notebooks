@@ -136,16 +136,14 @@ void KNN::NearestNeighbor::_visit_single_subtree(
         }
         
         if (query[axis] < (*curr_node.ptcoord)[axis])
-            _visit_single_subtree(
-                                    query,
+            _visit_single_subtree( query,
                                     output,
                                     left_child_idx(node_idx),
                                     depth+1,
                                     best_dist
                                     );
         else
-            _visit_single_subtree(
-                                    query,
+            _visit_single_subtree( query,
                                     output,
                                     right_child_idx(node_idx),
                                     depth+1,
@@ -162,19 +160,19 @@ void KNN::NearestNeighbor::_visit_k_subtree(
                                 const size_t depth ) {
     if (has_node(node_idx)) {
         auto axis = depth % DIMENSION;
-        auto curr_node = root(node_idx);
-        auto dist = query.distance(*curr_node.ptcoord);
+        auto curr_ptcoord = *root(node_idx).ptcoord;
+        auto dist = query.distance(curr_ptcoord);
         output.push(root(node_idx), dist);
 
-        if (query[axis] < (*curr_node.ptcoord)[axis]) {
+        if (query[axis] < (curr_ptcoord)[axis]) {
             _visit_k_subtree(query, output, left_child_idx(node_idx), depth+1);
             if (output.size() < output.max_bound()
-                    or std::abs((*curr_node.ptcoord)[axis] - query[axis]) < output.priority(0))
+                    or std::abs(curr_ptcoord[axis] - query[axis]) < output.priority(output.size()-1))
                 _visit_k_subtree(query, output, right_child_idx(node_idx), depth+1);
         } else {
             _visit_k_subtree(query, output, right_child_idx(node_idx), depth+1);
             if (output.size() < output.max_bound()
-                    or std::abs((*curr_node.ptcoord)[axis] - query[axis]) < output.priority(0))
+                    or std::abs(curr_ptcoord[axis] - query[axis]) < output.priority(output.size()-1))
                 _visit_k_subtree(query, output, left_child_idx(node_idx), depth+1);
         }
     }

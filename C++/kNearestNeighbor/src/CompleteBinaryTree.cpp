@@ -21,7 +21,7 @@ KNN::CompleteBinaryTree::CompleteBinaryTree(const CompleteBinaryTree& other)
 : reserved_capacity{other.reserved_capacity}
 , num_nodes{other.num_nodes} {
     cbt_pod_list.reserve(reserved_capacity);
-    for (const auto& i : other.cbt_pod_list) // TODO: check case other.num_nodes vs capacity
+    for (const auto& i : other.cbt_pod_list)
         cbt_pod_list.push_back(i);
 }
 
@@ -102,13 +102,14 @@ const KNN::CBT_POD& KNN::CompleteBinaryTree::right_child(const size_t node_idx) 
 
 
 bool KNN::CompleteBinaryTree::has_node(const size_t node_idx) const {
-    return static_cast<bool>(cbt_pod_list[node_idx].ptcoord) and node_idx < reserved_capacity;
+    return node_idx < reserved_capacity and
+            static_cast<bool>(cbt_pod_list[node_idx].ptcoord);
 }
 
 
 bool KNN::CompleteBinaryTree::has_left_child(const size_t node_idx) const {
     const size_t idx = 2*node_idx + 1;
-    return idx < reserved_capacity && cbt_pod_list[idx].ptcoord;
+    return idx < reserved_capacity and cbt_pod_list[idx].ptcoord;
         // As a design patch, we use .ptcoord there to test for nullptr because
         // this turned out to be a level-order tree where last level may
         // potentially contain empty leaf node.
@@ -117,7 +118,7 @@ bool KNN::CompleteBinaryTree::has_left_child(const size_t node_idx) const {
 
 bool KNN::CompleteBinaryTree::has_right_child(const size_t node_idx) const {
     const size_t idx = 2*node_idx + 2;
-    return idx < reserved_capacity && cbt_pod_list[idx].ptcoord;
+    return idx < reserved_capacity and cbt_pod_list[idx].ptcoord;
         // As a design patch, we use .ptcoord there to test for nullptr because
         // this turned out to be a level-order tree where last level may
         // potentially contain empty leaf node.}
