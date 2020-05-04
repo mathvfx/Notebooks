@@ -13,7 +13,7 @@
     std::cout <<
     "\n"
     "\tk-Nearest Neighbor Search\n"
-    "\t< Alex Lim  https://mathvfx.github.io  v2020.05.02 >\n"
+    "\t< Alex Lim  https://mathvfx.github.io  v2020.05.04 >\n"
         << std::endl;
 }
 

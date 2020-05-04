@@ -23,16 +23,13 @@ namespace KNN {
 
     class NearestNeighbor : public CompleteBinaryTree {
     public:
-        NearestNeighbor() = delete;
+        NearestNeighbor() {};
         NearestNeighbor(const WavefrontObject&);
 //        NearestNeighbor(const std::array<MathVector, DIMENSION>&);
 //        NearestNeighbor(const std::vector<MathVector>&);
 //        NearestNeighbor(const std::vector<CBT_POD>&);
 
-        void search(
-                CBT_POD& output,
-                const MathVector& query
-                );
+        void search(CBT_POD& output, const MathVector& query);
 
         void ksearch(
                 std::vector<CBT_POD>& output,
@@ -64,18 +61,8 @@ namespace KNN {
                 size_t node_idx = 0
                 );
         
-        // 1-NN helper function to recursively search for closest point in a
-        // single traversal (without consider other branches)
-        void _visit_single_subtree(
-                const MathVector& query,
-                CBT_POD& output,
-                const size_t node_idx = 0,
-                const size_t depth = 0,
-                PRECISION best_dist = std::numeric_limits<PRECISION>::infinity()
-                );
 
-        // k-NN helper function to recursively search for k closest point for
-        // k > 1. Default to _visit_single_subtree search when k=1.
+        // Helper function to recursively search for k closest point for k > 0.
         void _visit_k_subtree(  // EXPERIMENT!
                 const MathVector& query,
                 BoundedVector& output,

@@ -25,8 +25,9 @@ KNN::NearestNeighbor::NearestNeighbor(const WavefrontObject& pt_obj)
 
 
 void KNN::NearestNeighbor::search(CBT_POD& output, const MathVector& query) {
-    if(!is_empty())
-        _visit_single_subtree(query, output);
+    std::vector<CBT_POD> out;
+    ksearch(out, query, 1);
+    output = out.front();
 }
 
 
@@ -35,20 +36,14 @@ void KNN::NearestNeighbor::ksearch(
                                     const MathVector& query,
                                     size_t k ) {
     if (!is_empty()) {
-        if (k > 1) {
-            if (k > size()) k = size(); // Ensure k is clamped at size of data
-            BoundedVector k_best {k};
-            _visit_k_subtree(query, k_best);
-            output.clear();
-            output.resize(k);
-            for (size_t i {}; i < k; ++i)
-                output[i] = k_best[i];
-        } else {
-            CBT_POD best;
-            _visit_single_subtree(query, best);
-            output.clear();
-            output.push_back(best);
-        }
+        if (k > size()) k = size(); // Ensure k is clamped at size of data
+        if (k < 1) k = 1; // Ensure at least one
+        BoundedVector k_best {k};
+        _visit_k_subtree(query, k_best);
+        output.clear();
+        output.resize(k);
+        for (size_t i {}; i < k; ++i)
+            output[i] = k_best[i];
     } // outer if
 }
 
@@ -119,40 +114,6 @@ void KNN::NearestNeighbor::_kdtree( std::vector<CBT_POD>::iterator itr_begin,
 }
 
 
-void KNN::NearestNeighbor::_visit_single_subtree(
-                                const MathVector& query,
-                                CBT_POD& output,
-                                const size_t node_idx,
-                                const size_t depth,
-                                PRECISION best_dist ) {
-    if (has_node(node_idx)) {
-        auto axis = depth % DIMENSION;
-        auto curr_node = root(node_idx);
-        auto dist = query.distance(*curr_node.ptcoord);
-        
-        if (dist < best_dist) {
-            best_dist = dist;
-            output = curr_node;
-        }
-        
-        if (query[axis] < (*curr_node.ptcoord)[axis])
-            _visit_single_subtree( query,
-                                    output,
-                                    left_child_idx(node_idx),
-                                    depth+1,
-                                    best_dist
-                                    );
-        else
-            _visit_single_subtree( query,
-                                    output,
-                                    right_child_idx(node_idx),
-                                    depth+1,
-                                    best_dist
-                                    );
-    }
-}
-
-
 void KNN::NearestNeighbor::_visit_k_subtree(
                                 const MathVector& query,
                                 BoundedVector& output,
@@ -175,5 +136,5 @@ void KNN::NearestNeighbor::_visit_k_subtree(
                     or std::abs(curr_ptcoord[axis] - query[axis]) < output.priority(output.size()-1))
                 _visit_k_subtree(query, output, left_child_idx(node_idx), depth+1);
         }
-    }
+    } // END if has_node
 }
