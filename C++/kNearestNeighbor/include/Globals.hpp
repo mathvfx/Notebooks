@@ -64,6 +64,6 @@ constexpr bool FpEquality(
 }
 
 
-}; // END namespace KNN
+} // END namespace KNN
 
 #endif /* KNearestNeighbor_Globals_hpp */
